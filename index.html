@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СНТ «Медрадиолог»</title>
     <style>
-        /* Сброс и база */
         * {
             margin: 0;
             padding: 0;
@@ -30,11 +29,15 @@
             border: 1px solid #e6e2d8;
         }
 
-        /* Шапка */
         .header {
             border-bottom: 2px solid #d9d4c5;
             padding-bottom: 18px;
             margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .header h1 {
@@ -56,6 +59,35 @@
             padding: 0 18px;
             border-radius: 60px;
             letter-spacing: 0.2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .login-btn-header {
+            background: #d3e2c6;
+            border: 1px solid #b8ceaa;
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-weight: 500;
+            color: #1d3a28;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 0.9rem;
+        }
+
+        .login-btn-header:hover {
+            background: #c0d6b0;
+            transform: scale(1.02);
+        }
+
+        .login-btn-header.logged-in {
+            background: #6f9a78;
+            color: white;
+            border-color: #5a8262;
         }
 
         /* Верхнее меню */
@@ -131,7 +163,6 @@
             font-weight: 500;
         }
 
-        /* Контент страниц */
         .page-content {
             display: none;
             padding: 20px 0 10px 0;
@@ -217,7 +248,6 @@
             margin-top: 4px;
         }
 
-        /* Календарь */
         .calendar-container {
             background: #f6f9f3;
             border-radius: 16px;
@@ -282,7 +312,6 @@
             font-size: 1.2rem;
         }
 
-        /* Форма обратной связи */
         .feedback-form {
             max-width: 600px;
             margin: 0 auto;
@@ -376,7 +405,6 @@
             background: #c0d6b0;
         }
 
-        /* ФУТЕР */
         .footer {
             margin-top: 28px;
             padding: 18px 0 12px 0;
@@ -446,7 +474,6 @@
             background: #cdddc0;
         }
 
-        /* ПАНЕЛЬ УПРАВЛЕНИЯ */
         .admin-panel {
             background: #f4f9f0;
             border-radius: 28px;
@@ -630,6 +657,16 @@
             background: #5a8262;
         }
 
+        .admin-actions .approve-btn {
+            background: #6f9a78;
+            border-color: #5a8262;
+            color: white;
+        }
+
+        .admin-actions .approve-btn:hover {
+            background: #5a8262;
+        }
+
         .small-note {
             font-size: 0.8rem;
             color: #708d72;
@@ -658,6 +695,7 @@
         .topic-item .topic-name {
             font-weight: 450;
             color: #1f402a;
+            flex: 1;
         }
 
         .topic-item .topic-delete {
@@ -676,6 +714,23 @@
             opacity: 1;
             background: #f5d6d6;
             transform: scale(1.1);
+        }
+
+        .topic-item .topic-status {
+            font-size: 0.8rem;
+            padding: 2px 12px;
+            border-radius: 30px;
+            margin-right: 8px;
+        }
+
+        .topic-item .topic-status.pending {
+            background: #f5e6b0;
+            color: #7a6a20;
+        }
+
+        .topic-item .topic-status.approved {
+            background: #b0d4b0;
+            color: #1a5a2a;
         }
 
         .feedback-message {
@@ -715,7 +770,6 @@
             text-decoration: underline;
         }
 
-        /* Модальное окно логина */
         .login-overlay {
             display: none;
             position: fixed;
@@ -826,7 +880,63 @@
             display: block;
         }
 
-        /* Адаптив */
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f6f9f3;
+            border-radius: 12px;
+            margin-bottom: 6px;
+            border: 1px solid #dce3d2;
+        }
+
+        .user-item .user-info {
+            font-weight: 450;
+            color: #1f402a;
+            flex: 1;
+        }
+
+        .user-item .user-delete {
+            color: #b14a4a;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0 8px;
+            border-radius: 50%;
+            transition: 0.15s;
+            opacity: 0.6;
+        }
+
+        .user-item .user-delete:hover {
+            opacity: 1;
+            background: #f5d6d6;
+            transform: scale(1.1);
+        }
+
+        .user-item .user-status {
+            font-size: 0.8rem;
+            padding: 2px 12px;
+            border-radius: 30px;
+            margin-right: 8px;
+        }
+
+        .user-item .user-status.pending {
+            background: #f5e6b0;
+            color: #7a6a20;
+        }
+
+        .user-item .user-status.approved {
+            background: #b0d4b0;
+            color: #1a5a2a;
+        }
+
+        .divider-light {
+            margin: 14px 0 8px 0;
+            border-top: 2px dotted #d6decb;
+        }
+
         @media (max-width: 700px) {
             .container {
                 padding: 20px 16px 0 16px;
@@ -837,6 +947,14 @@
             .header h1 .light {
                 font-size: 1.2rem;
                 padding: 0 12px;
+            }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .header-actions {
+                justify-content: flex-end;
             }
             .top-menu {
                 padding: 6px 12px;
@@ -904,46 +1022,6 @@
                 padding: 4px 2px;
             }
         }
-
-        .divider-light {
-            margin: 14px 0 8px 0;
-            border-top: 2px dotted #d6decb;
-        }
-
-        /* Список зарегистрированных пользователей */
-        .user-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background: #f6f9f3;
-            border-radius: 12px;
-            margin-bottom: 6px;
-            border: 1px solid #dce3d2;
-        }
-
-        .user-item .user-info {
-            font-weight: 450;
-            color: #1f402a;
-        }
-
-        .user-item .user-delete {
-            color: #b14a4a;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            padding: 0 8px;
-            border-radius: 50%;
-            transition: 0.15s;
-            opacity: 0.6;
-        }
-
-        .user-item .user-delete:hover {
-            opacity: 1;
-            background: #f5d6d6;
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
@@ -954,6 +1032,9 @@
             СНТ «Медрадиолог»
             <span class="light">🌱 садоводство</span>
         </h1>
+        <div class="header-actions">
+            <button id="loginHeaderBtn" class="login-btn-header">🔐 Вход</button>
+        </div>
     </div>
 
     <!-- ВЕРХНЕЕ МЕНЮ -->
@@ -988,81 +1069,70 @@
 
     <!-- СТРАНИЦЫ (контент) -->
     <div id="pageContent" class="page-content active">
-        <!-- Новости (Главная) -->
+        <!-- Новости -->
         <div id="page-news" class="page-content-inner active">
             <h2>📰 Новости СНТ «Медрадиолог»</h2>
             <div class="date" id="newsDate">Обновлено: 18 июля 2026</div>
             <div id="newsContainer"></div>
         </div>
 
-        <!-- Правила -->
         <div id="page-rules" class="page-content-inner">
             <h2>📋 Правила СНТ «Медрадиолог»</h2>
             <div class="date">Версия 2.4 от 01.06.2026</div>
             <div id="rulesContainer"></div>
         </div>
 
-        <!-- Объявления -->
         <div id="page-ads" class="page-content-inner">
             <h2>📢 Объявления</h2>
             <div class="date">Актуально на 18.07.2026</div>
             <div id="adsContainer"></div>
         </div>
 
-        <!-- Собрания -->
         <div id="page-meetings" class="page-content-inner">
             <h2>📅 Собрания СНТ «Медрадиолог»</h2>
             <div class="date">Планируемые и прошедшие</div>
             <div id="meetingsContainer"></div>
         </div>
 
-        <!-- Суд -->
         <div id="page-court" class="page-content-inner">
             <h2>⚖️ Суд и разбирательства</h2>
             <div class="date">Информация по судебным делам</div>
             <div id="courtContainer"></div>
         </div>
 
-        <!-- Голосование -->
         <div id="page-vote" class="page-content-inner">
             <h2>🗳️ Голосование</h2>
             <div class="date">Активные опросы</div>
             <div id="voteContainer"></div>
         </div>
 
-        <!-- Контакты -->
         <div id="page-docs" class="page-content-inner">
             <h2>📄 Контакты и реквизиты</h2>
             <div id="docsContainer"></div>
         </div>
 
-        <!-- Взносы -->
         <div id="page-pay" class="page-content-inner">
             <h2>💰 Взносы и оплата</h2>
             <div class="date">Тарифы на 2026 год</div>
             <div id="payContainer"></div>
         </div>
 
-        <!-- Устав -->
         <div id="page-norm" class="page-content-inner">
             <h2>📜 Устав и нормативные документы</h2>
             <div id="normContainer"></div>
         </div>
 
-        <!-- Информация -->
         <div id="page-info" class="page-content-inner">
             <h2>ℹ️ Полезная информация</h2>
             <div id="infoContainer"></div>
         </div>
 
-        <!-- Форум -->
         <div id="page-forum" class="page-content-inner">
             <h2>💬 Форум СНТ «Медрадиолог»</h2>
             <p>Добро пожаловать на форум! Здесь вы можете задать вопросы, поделиться новостями и обсудить важные темы.</p>
             <div id="forumContainer"></div>
         </div>
 
-        <!-- Чаты -->
         <div id="page-chat" class="page-content-inner">
             <h2>📱 Чаты СНТ «Медрадиолог»</h2>
             <p>Присоединяйтесь к нашим чатам для оперативного общения:</p>
@@ -1192,13 +1262,22 @@
     <div id="adminPanel" class="admin-panel">
         <h4>
             🧑‍🌾 Управление сайтом <span>редактор</span>
-            <button id="saveToStorageBtn" class="save-btn" style="font-size:0.8rem; padding:4px 16px;">💾 Сохранить данные</button>
+            <button id="saveToStorageBtn" class="save-btn" style="font-size:0.8rem; padding:4px 16px;">💾 Сохранить</button>
             <span class="save-hint">данные в localStorage</span>
         </h4>
 
-        <!-- Управление пользователями -->
+        <!-- Заявки на регистрацию -->
         <div class="admin-section">
-            <h5>👤 Управление пользователями (регистрации)</h5>
+            <h5>📩 Заявки на регистрацию</h5>
+            <div id="applicationsList" class="topic-list"></div>
+            <div class="admin-actions">
+                <button id="clearAppsBtn" class="danger-btn">🗑️ Очистить все заявки</button>
+            </div>
+        </div>
+
+        <!-- Подтверждённые пользователи -->
+        <div class="admin-section">
+            <h5>✅ Подтверждённые пользователи</h5>
             <div class="admin-grid">
                 <div class="admin-item">
                     <label>Фамилия</label>
@@ -1270,7 +1349,7 @@
             <div id="pagePostsList" class="topic-list"></div>
         </div>
 
-        <!-- Управление событиями календаря -->
+        <!-- Управление событиями -->
         <div class="admin-section">
             <h5>📅 Управление событиями</h5>
             <div class="admin-grid">
@@ -1342,52 +1421,28 @@
 
 <script>
     (function() {
-        // === Ключи для localStorage ===
         const STORAGE_KEYS = {
             pageData: 'medradiolog_pageData',
             events: 'medradiolog_events',
             feedback: 'medradiolog_feedback',
             users: 'medradiolog_users',
+            applications: 'medradiolog_applications',
             nextIds: 'medradiolog_nextIds'
         };
 
-        // === Загрузка данных из localStorage ===
         function loadData() {
-            let pageData = {};
-            let events = [];
-            let feedbackMessages = [];
-            let users = [];
-            let nextIds = {};
+            let pageData = {}, events = [], feedbackMessages = [], users = [], applications = [], nextIds = {};
 
-            const savedPageData = localStorage.getItem(STORAGE_KEYS.pageData);
-            if (savedPageData) {
-                try { pageData = JSON.parse(savedPageData); } catch(e) { pageData = getDefaultPageData(); }
-            } else { pageData = getDefaultPageData(); }
+            try { pageData = JSON.parse(localStorage.getItem(STORAGE_KEYS.pageData)) || getDefaultPageData(); } catch(e) { pageData = getDefaultPageData(); }
+            try { events = JSON.parse(localStorage.getItem(STORAGE_KEYS.events)) || getDefaultEvents(); } catch(e) { events = getDefaultEvents(); }
+            try { feedbackMessages = JSON.parse(localStorage.getItem(STORAGE_KEYS.feedback)) || getDefaultFeedback(); } catch(e) { feedbackMessages = getDefaultFeedback(); }
+            try { users = JSON.parse(localStorage.getItem(STORAGE_KEYS.users)) || getDefaultUsers(); } catch(e) { users = getDefaultUsers(); }
+            try { applications = JSON.parse(localStorage.getItem(STORAGE_KEYS.applications)) || []; } catch(e) { applications = []; }
+            try { nextIds = JSON.parse(localStorage.getItem(STORAGE_KEYS.nextIds)) || getDefaultNextIds(pageData); } catch(e) { nextIds = getDefaultNextIds(pageData); }
 
-            const savedEvents = localStorage.getItem(STORAGE_KEYS.events);
-            if (savedEvents) {
-                try { events = JSON.parse(savedEvents); } catch(e) { events = getDefaultEvents(); }
-            } else { events = getDefaultEvents(); }
-
-            const savedFeedback = localStorage.getItem(STORAGE_KEYS.feedback);
-            if (savedFeedback) {
-                try { feedbackMessages = JSON.parse(savedFeedback); } catch(e) { feedbackMessages = getDefaultFeedback(); }
-            } else { feedbackMessages = getDefaultFeedback(); }
-
-            const savedUsers = localStorage.getItem(STORAGE_KEYS.users);
-            if (savedUsers) {
-                try { users = JSON.parse(savedUsers); } catch(e) { users = getDefaultUsers(); }
-            } else { users = getDefaultUsers(); }
-
-            const savedNextIds = localStorage.getItem(STORAGE_KEYS.nextIds);
-            if (savedNextIds) {
-                try { nextIds = JSON.parse(savedNextIds); } catch(e) { nextIds = getDefaultNextIds(pageData); }
-            } else { nextIds = getDefaultNextIds(pageData); }
-
-            return { pageData, events, feedbackMessages, users, nextIds };
+            return { pageData, events, feedbackMessages, users, applications, nextIds };
         }
 
-        // === Дефолтные данные ===
         function getDefaultPageData() {
             return {
                 news: [
@@ -1459,7 +1514,7 @@
 
         function getDefaultUsers() {
             return [
-                { id: 1, surname: 'Иванов', name: 'Иван', patronymic: 'Иванович', phone: '+7 (916) 111-22-33', plots: '15, 42', status: 'member' }
+                { id: 1, surname: 'Петров', name: 'Сергей', patronymic: 'Иванович', phone: '+7 (916) 111-22-33', plots: '15, 42', status: 'member' }
             ];
         }
 
@@ -1472,45 +1527,28 @@
             return ids;
         }
 
-        // === Сохранение данных ===
         function saveData() {
             localStorage.setItem(STORAGE_KEYS.pageData, JSON.stringify(pageData));
             localStorage.setItem(STORAGE_KEYS.events, JSON.stringify(events));
             localStorage.setItem(STORAGE_KEYS.feedback, JSON.stringify(feedbackMessages));
             localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
+            localStorage.setItem(STORAGE_KEYS.applications, JSON.stringify(applications));
             localStorage.setItem(STORAGE_KEYS.nextIds, JSON.stringify(nextIds));
-            showSaveNotification('✅ Данные сохранены в localStorage');
         }
 
-        function showSaveNotification(msg) {
-            const status = document.getElementById('saveStatus');
-            if (status) {
-                status.textContent = msg;
-                status.style.display = 'block';
-                setTimeout(() => { status.style.display = 'none'; }, 3000);
-            } else {
-                const hint = document.querySelector('.save-hint');
-                if (hint) {
-                    const original = hint.textContent;
-                    hint.textContent = '✅ ' + msg.replace('✅ ', '');
-                    setTimeout(() => { hint.textContent = original; }, 3000);
-                }
-            }
-        }
-
-        // === Инициализация данных ===
         const loaded = loadData();
         let pageData = loaded.pageData;
         let events = loaded.events;
         let feedbackMessages = loaded.feedbackMessages;
         let users = loaded.users;
+        let applications = loaded.applications;
         let nextIds = loaded.nextIds;
 
-        // === Элементы ===
         const panel = document.getElementById('adminPanel');
         const toggleBtn = document.getElementById('designToggleBtn');
         const closeBtn = document.getElementById('closeAdminBtn');
         const saveBtn = document.getElementById('saveToStorageBtn');
+        const loginHeaderBtn = document.getElementById('loginHeaderBtn');
         const loginOverlay = document.getElementById('loginOverlay');
         const loginUser = document.getElementById('loginUser');
         const loginPass = document.getElementById('loginPass');
@@ -1521,19 +1559,20 @@
         const feedbackMessagesContainer = document.getElementById('feedbackMessages');
         const feedbackForm = document.getElementById('feedbackForm');
         const usersList = document.getElementById('usersList');
+        const applicationsList = document.getElementById('applicationsList');
         const registrationForm = document.getElementById('registrationForm');
 
         let isAuthenticated = false;
         let currentPage = 'news';
         let currentAdminPage = 'news';
 
-        // === Функции рендеринга ===
+        // === Рендеринг ===
         function renderPage(pageId) {
             const container = document.getElementById(`${pageId}Container`);
             if (!container) return;
             const data = pageData[pageId] || [];
             if (data.length === 0) {
-                container.innerHTML = '<p style="color: #6f8a76;">Нет записей. Добавьте первую запись в админ-панели.</p>';
+                container.innerHTML = '<p style="color: #6f8a76;">Нет записей.</p>';
                 return;
             }
             let html = '';
@@ -1549,8 +1588,7 @@
         }
 
         function renderAllPages() {
-            const pageIds = Object.keys(pageData);
-            pageIds.forEach(id => renderPage(id));
+            Object.keys(pageData).forEach(id => renderPage(id));
         }
 
         function renderAdminPosts(pageId) {
@@ -1582,7 +1620,7 @@
         function renderUsers() {
             if (!usersList) return;
             if (users.length === 0) {
-                usersList.innerHTML = '<p style="color: #6f8a76; font-size:0.9rem;">Нет зарегистрированных пользователей</p>';
+                usersList.innerHTML = '<p style="color: #6f8a76; font-size:0.9rem;">Нет подтверждённых пользователей</p>';
                 return;
             }
             let html = '';
@@ -1590,7 +1628,8 @@
                 const statusMap = { member: 'Член СНТ', owner: 'Собственник', both: 'Член и собственник' };
                 html += `
                     <div class="user-item">
-                        <span class="user-info">${user.surname} ${user.name} ${user.patronymic || ''} | уч. ${user.plots} | ${user.phone} | ${statusMap[user.status] || user.status}</span>
+                        <span class="user-info">${user.surname} ${user.name} ${user.patronymic || ''} | уч. ${user.plots} | ${user.phone}</span>
+                        <span class="user-status approved">✅ подтверждён</span>
                         <button class="user-delete" data-user-id="${user.id}">✕</button>
                     </div>
                 `;
@@ -1602,6 +1641,77 @@
                     deleteUser(id);
                 });
             });
+        }
+
+        function renderApplications() {
+            if (!applicationsList) return;
+            if (applications.length === 0) {
+                applicationsList.innerHTML = '<p style="color: #6f8a76; font-size:0.9rem;">Нет новых заявок</p>';
+                return;
+            }
+            let html = '';
+            applications.forEach((app, index) => {
+                const statusMap = { member: 'Член СНТ', owner: 'Собственник', both: 'Член и собственник' };
+                html += `
+                    <div class="topic-item">
+                        <span class="topic-name">
+                            <strong>${app.surname} ${app.name} ${app.patronymic || ''}</strong> 
+                            | тел: ${app.phone} 
+                            | уч. ${app.plots} 
+                            | ${statusMap[app.status] || app.status}
+                            ${app.info ? ' | ' + app.info : ''}
+                        </span>
+                        <span class="topic-status pending">⏳ ожидает</span>
+                        <div style="display:flex; gap:4px;">
+                            <button class="approve-btn" style="background:#6f9a78;color:white;border:none;border-radius:30px;padding:2px 12px;cursor:pointer;font-size:0.8rem;" data-app-index="${index}">✅ Подтвердить</button>
+                            <button class="topic-delete" data-app-index="${index}">✕</button>
+                        </div>
+                    </div>
+                `;
+            });
+            applicationsList.innerHTML = html;
+
+            applicationsList.querySelectorAll('.approve-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-app-index'));
+                    approveApplication(index);
+                });
+            });
+
+            applicationsList.querySelectorAll('.topic-delete').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-app-index'));
+                    if (confirm('Удалить эту заявку?')) {
+                        applications.splice(index, 1);
+                        saveData();
+                        renderApplications();
+                    }
+                });
+            });
+        }
+
+        function approveApplication(index) {
+            if (index < 0 || index >= applications.length) return;
+            const app = applications[index];
+            if (confirm(`Подтвердить регистрацию пользователя ${app.surname} ${app.name}?`)) {
+                // Добавляем в пользователи
+                const maxId = users.reduce((max, u) => Math.max(max, u.id || 0), 0);
+                users.push({
+                    id: maxId + 1,
+                    surname: app.surname,
+                    name: app.name,
+                    patronymic: app.patronymic || '',
+                    phone: app.phone,
+                    plots: app.plots,
+                    status: app.status || 'member'
+                });
+                // Удаляем из заявок
+                applications.splice(index, 1);
+                saveData();
+                renderUsers();
+                renderApplications();
+                alert('✅ Пользователь подтверждён и добавлен в список!');
+            }
         }
 
         function renderCalendar() {
@@ -1644,17 +1754,13 @@
 
         function renderUpcomingEvents() {
             const today = new Date().toISOString().split('T')[0];
-            const upcoming = events
-                .filter(e => e.date >= today)
-                .sort((a, b) => a.date.localeCompare(b.date));
-
+            const upcoming = events.filter(e => e.date >= today).sort((a, b) => a.date.localeCompare(b.date));
             const container = document.getElementById('upcomingEvents');
             if (!container) return;
             if (upcoming.length === 0) {
                 container.innerHTML = '<p style="color: #6f8a76;">События не найдены</p>';
                 return;
             }
-
             let html = '';
             upcoming.forEach(event => {
                 const dateObj = new Date(event.date + 'T00:00:00');
@@ -1722,12 +1828,9 @@
             });
         }
 
-        // === Переключение страниц ===
         function switchPage(pageId) {
             currentPage = pageId;
-            document.querySelectorAll('.page-content-inner').forEach(el => {
-                el.classList.remove('active');
-            });
+            document.querySelectorAll('.page-content-inner').forEach(el => el.classList.remove('active'));
             const target = document.getElementById(`page-${pageId}`);
             if (target) {
                 target.classList.add('active');
@@ -1735,21 +1838,14 @@
             }
             document.querySelectorAll('.top-menu a, .sub-menu a').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('data-page') === pageId) {
-                    link.classList.add('active');
-                }
+                if (link.getAttribute('data-page') === pageId) link.classList.add('active');
             });
-            if (pageId === 'calendar') {
-                renderCalendar();
-            }
+            if (pageId === 'calendar') renderCalendar();
         }
 
-        // === CRUD операции для постов ===
+        // === CRUD ===
         function addPost(pageId, title, text) {
-            if (!title.trim() || !text.trim()) {
-                alert('Заполните заголовок и текст');
-                return;
-            }
+            if (!title.trim() || !text.trim()) { alert('Заполните заголовок и текст'); return; }
             const id = nextIds[pageId] || 1;
             pageData[pageId].push({ id: id, title: title.trim(), text: text.trim() });
             nextIds[pageId] = id + 1;
@@ -1778,7 +1874,6 @@
             }
         }
 
-        // === CRUD для пользователей ===
         function addUser(surname, name, patronymic, phone, plots, status) {
             if (!surname.trim() || !name.trim() || !phone.trim() || !plots.trim()) {
                 alert('Заполните все обязательные поля');
@@ -1819,12 +1914,8 @@
             }
         }
 
-        // === CRUD для событий ===
         function addEvent(title, date, desc) {
-            if (!title.trim() || !date) {
-                alert('Заполните название и дату события');
-                return;
-            }
+            if (!title.trim() || !date) { alert('Заполните название и дату'); return; }
             const maxId = events.reduce((max, e) => Math.max(max, e.id || 0), 0);
             events.push({ id: maxId + 1, title: title.trim(), date: date, description: desc.trim() || '' });
             saveData();
@@ -1853,7 +1944,6 @@
             }
         }
 
-        // === CRUD для обратной связи ===
         function addFeedback(data) {
             const maxId = feedbackMessages.reduce((max, m) => Math.max(max, m.id || 0), 0);
             feedbackMessages.push({
@@ -1886,7 +1976,29 @@
             }
         }
 
-        // === Панель управления ===
+        function addApplication(data) {
+            applications.push({
+                surname: data.surname,
+                name: data.name,
+                patronymic: data.patronymic || '',
+                phone: data.phone,
+                plots: data.plots,
+                status: data.status || 'member',
+                info: data.info || '',
+                date: new Date().toISOString()
+            });
+            saveData();
+            renderApplications();
+        }
+
+        function clearAllApplications() {
+            if (confirm('Удалить все заявки?')) {
+                applications = [];
+                saveData();
+                renderApplications();
+            }
+        }
+
         function showPanel() {
             if (isAuthenticated) {
                 panel.classList.add('active');
@@ -1894,10 +2006,13 @@
                 renderEventsList();
                 renderFeedbackMessages();
                 renderUsers();
+                renderApplications();
+                loginHeaderBtn.textContent = '🚪 Выйти';
+                loginHeaderBtn.classList.add('logged-in');
             } else {
                 loginOverlay.classList.add('active');
-                loginUser.value = '';
-                loginPass.value = '';
+                loginUser.value = 'admin';
+                loginPass.value = 'admin';
                 loginError.classList.remove('show');
                 loginUser.focus();
             }
@@ -1905,9 +2020,10 @@
 
         function hidePanel() {
             panel.classList.remove('active');
+            loginHeaderBtn.textContent = '🔐 Вход';
+            loginHeaderBtn.classList.remove('logged-in');
         }
 
-        // === Логин ===
         function performLogin() {
             const user = loginUser.value.trim();
             const pass = loginPass.value.trim();
@@ -1920,6 +2036,9 @@
                 renderEventsList();
                 renderFeedbackMessages();
                 renderUsers();
+                renderApplications();
+                loginHeaderBtn.textContent = '🚪 Выйти';
+                loginHeaderBtn.classList.add('logged-in');
             } else {
                 loginError.classList.add('show');
                 loginPass.value = '';
@@ -1927,21 +2046,33 @@
             }
         }
 
-        // === Инициализация ===
+        function logout() {
+            isAuthenticated = false;
+            hidePanel();
+        }
+
         function init() {
             renderAllPages();
             renderCalendar();
             renderFeedbackMessages();
             renderUsers();
+            renderApplications();
             switchPage('news');
 
-            // Кнопка сохранения
             saveBtn.addEventListener('click', function() {
                 saveData();
                 alert('✅ Все данные сохранены в localStorage!\n\nВы можете скопировать этот код на GitHub Pages.');
             });
 
-            // Переключатели страниц в админке
+            // Кнопка входа в шапке
+            loginHeaderBtn.addEventListener('click', function() {
+                if (isAuthenticated) {
+                    logout();
+                } else {
+                    showPanel();
+                }
+            });
+
             document.querySelectorAll('#pageSelector button').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('#pageSelector button').forEach(b => b.classList.remove('active'));
@@ -1953,44 +2084,41 @@
                 });
             });
 
-            // Добавление поста
             document.getElementById('addPostBtn').addEventListener('click', function() {
-                const title = document.getElementById('postTitle').value;
-                const text = document.getElementById('postText').value;
-                addPost(currentAdminPage, title, text);
+                addPost(currentAdminPage, document.getElementById('postTitle').value, document.getElementById('postText').value);
             });
 
-            // Очистка постов страницы
             document.getElementById('clearPagePostsBtn').addEventListener('click', function() {
                 clearPagePosts(currentAdminPage);
             });
 
-            // Пользователи
             document.getElementById('addUserBtn').addEventListener('click', function() {
-                const surname = document.getElementById('adminUserSurname').value;
-                const name = document.getElementById('adminUserName').value;
-                const patronymic = document.getElementById('adminUserPatronymic').value;
-                const phone = document.getElementById('adminUserPhone').value;
-                const plots = document.getElementById('adminUserPlots').value;
-                const status = document.getElementById('adminUserStatus').value;
-                addUser(surname, name, patronymic, phone, plots, status);
+                addUser(
+                    document.getElementById('adminUserSurname').value,
+                    document.getElementById('adminUserName').value,
+                    document.getElementById('adminUserPatronymic').value,
+                    document.getElementById('adminUserPhone').value,
+                    document.getElementById('adminUserPlots').value,
+                    document.getElementById('adminUserStatus').value
+                );
             });
 
             document.getElementById('clearUsersBtn').addEventListener('click', clearAllUsers);
 
-            // События
+            document.getElementById('clearAppsBtn').addEventListener('click', clearAllApplications);
+
             document.getElementById('addEventBtn').addEventListener('click', function() {
-                const title = document.getElementById('eventTitle').value;
-                const date = document.getElementById('eventDate').value;
-                const desc = document.getElementById('eventDesc').value;
-                addEvent(title, date, desc);
+                addEvent(
+                    document.getElementById('eventTitle').value,
+                    document.getElementById('eventDate').value,
+                    document.getElementById('eventDesc').value
+                );
             });
+
             document.getElementById('clearEventsBtn').addEventListener('click', clearAllEvents);
 
-            // Обратная связь
             document.getElementById('clearFeedbackBtn').addEventListener('click', clearAllFeedback);
 
-            // Форма обратной связи
             feedbackForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const surname = document.getElementById('fbSurname').value.trim();
@@ -2007,19 +2135,16 @@
                     return;
                 }
                 if (!consent) {
-                    document.getElementById('feedbackStatus').innerHTML = '<span style="color: #b14a4a;">❌ Необходимо дать согласие на обработку данных</span>';
+                    document.getElementById('feedbackStatus').innerHTML = '<span style="color: #b14a4a;">❌ Необходимо дать согласие</span>';
                     return;
                 }
 
                 addFeedback({ surname, name, patronymic, plot, phone, email, message });
-                document.getElementById('feedbackStatus').innerHTML = '<span style="color: #4f8a64;">✅ Сообщение отправлено! Мы свяжемся с вами.</span>';
+                document.getElementById('feedbackStatus').innerHTML = '<span style="color: #4f8a64;">✅ Сообщение отправлено!</span>';
                 feedbackForm.reset();
-                setTimeout(() => {
-                    document.getElementById('feedbackStatus').innerHTML = '';
-                }, 5000);
+                setTimeout(() => { document.getElementById('feedbackStatus').innerHTML = ''; }, 5000);
             });
 
-            // Форма регистрации
             registrationForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const surname = document.getElementById('regSurname').value.trim();
@@ -2036,31 +2161,26 @@
                     return;
                 }
                 if (!consent) {
-                    document.getElementById('regStatusMsg').innerHTML = '<span style="color: #b14a4a;">❌ Необходимо дать согласие на обработку данных</span>';
+                    document.getElementById('regStatusMsg').innerHTML = '<span style="color: #b14a4a;">❌ Необходимо дать согласие</span>';
                     return;
                 }
 
-                // Сохраняем пользователя в админку
-                addUser(surname, name, patronymic, phone, plots, status);
-
-                // Показываем сообщение об отправке
+                addApplication({ surname, name, patronymic, phone, plots, status, info });
                 document.getElementById('regStatusMsg').innerHTML = `
                     <div style="background: #e8f4e0; border-radius: 16px; padding: 20px; text-align: left;">
                         <p style="color: #1f402a; font-weight: 500;">✅ Заявка отправлена!</p>
-                        <p style="color: #2d4437; margin-top: 8px;">Ваша заявка на регистрацию получена. После проверки данных администратором на указанный номер телефона будет отправлено письмо с учетными данными.</p>
-                        <p style="color: #6f8a76; font-size: 0.9rem; margin-top: 8px;">Ожидайте письмо на адрес: ${document.getElementById('regEmail')?.value || 'указанный при регистрации'}</p>
+                        <p style="color: #2d4437; margin-top: 8px;">Ваша заявка на регистрацию получена. После проверки данных администратором вы получите уведомление.</p>
                     </div>
                 `;
                 registrationForm.reset();
-                setTimeout(() => {
-                    document.getElementById('regStatusMsg').innerHTML = '';
-                }, 8000);
+                setTimeout(() => { document.getElementById('regStatusMsg').innerHTML = ''; }, 8000);
             });
 
-            // Админ-панель
             toggleBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                if (panel.classList.contains('active')) {
+                if (!isAuthenticated) {
+                    showPanel();
+                } else if (panel.classList.contains('active')) {
                     hidePanel();
                 } else {
                     showPanel();
@@ -2069,7 +2189,6 @@
 
             closeBtn.addEventListener('click', hidePanel);
 
-            // Логин
             loginSubmit.addEventListener('click', performLogin);
             loginCancel.addEventListener('click', function() {
                 loginOverlay.classList.remove('active');
@@ -2094,26 +2213,24 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Обработчики для всех меню
             document.querySelectorAll('.top-menu a, .sub-menu a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const page = this.getAttribute('data-page');
-                    if (page) {
-                        switchPage(page);
-                    }
+                    if (page) switchPage(page);
                 });
             });
 
             console.log('🌱 Данные загружены из localStorage');
             console.log('👤 Пользователей:', users.length);
+            console.log('📩 Заявок:', applications.length);
             console.log('📝 Постов:', Object.keys(pageData).reduce((sum, key) => sum + pageData[key].length, 0));
             console.log('📅 Событий:', events.length);
             console.log('📨 Сообщений:', feedbackMessages.length);
         }
 
         init();
-        console.log('🌱 СНТ «Медрадиолог» загружен. KolaDesign — защищённый вход (admin/admin)');
+        console.log('🌱 СНТ «Медрадиолог» загружен. Кнопка входа в шапке. Логин: admin, пароль: admin');
     })();
 </script>
 </body>
