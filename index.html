@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СНТ «Медрадиолог»</title>
     <style>
+        /* Стили (без изменений) */
         * {
             margin: 0;
             padding: 0;
@@ -1425,12 +1426,35 @@
         function loadData() {
             let pageData = {}, events = [], feedbackMessages = [], users = [], applications = [], nextIds = {};
 
-            try { pageData = JSON.parse(localStorage.getItem(STORAGE_KEYS.pageData)) || getDefaultPageData(); } catch(e) { pageData = getDefaultPageData(); }
-            try { events = JSON.parse(localStorage.getItem(STORAGE_KEYS.events)) || getDefaultEvents(); } catch(e) { events = getDefaultEvents(); }
-            try { feedbackMessages = JSON.parse(localStorage.getItem(STORAGE_KEYS.feedback)) || getDefaultFeedback(); } catch(e) { feedbackMessages = getDefaultFeedback(); }
-            try { users = JSON.parse(localStorage.getItem(STORAGE_KEYS.users)) || getDefaultUsers(); } catch(e) { users = getDefaultUsers(); }
-            try { applications = JSON.parse(localStorage.getItem(STORAGE_KEYS.applications)) || []; } catch(e) { applications = []; }
-            try { nextIds = JSON.parse(localStorage.getItem(STORAGE_KEYS.nextIds)) || getDefaultNextIds(pageData); } catch(e) { nextIds = getDefaultNextIds(pageData); }
+            try { 
+                const saved = localStorage.getItem(STORAGE_KEYS.pageData);
+                pageData = saved ? JSON.parse(saved) : getDefaultPageData();
+            } catch(e) { pageData = getDefaultPageData(); }
+            
+            try { 
+                const saved = localStorage.getItem(STORAGE_KEYS.events);
+                events = saved ? JSON.parse(saved) : getDefaultEvents();
+            } catch(e) { events = getDefaultEvents(); }
+            
+            try { 
+                const saved = localStorage.getItem(STORAGE_KEYS.feedback);
+                feedbackMessages = saved ? JSON.parse(saved) : getDefaultFeedback();
+            } catch(e) { feedbackMessages = getDefaultFeedback(); }
+            
+            try { 
+                const saved = localStorage.getItem(STORAGE_KEYS.users);
+                users = saved ? JSON.parse(saved) : getDefaultUsers();
+            } catch(e) { users = getDefaultUsers(); }
+            
+            try { 
+                const saved = localStorage.getItem(STORAGE_KEYS.applications);
+                applications = saved ? JSON.parse(saved) : [];
+            } catch(e) { applications = []; }
+            
+            try { 
+                const saved = localStorage.getItem(STORAGE_KEYS.nextIds);
+                nextIds = saved ? JSON.parse(saved) : getDefaultNextIds(pageData);
+            } catch(e) { nextIds = getDefaultNextIds(pageData); }
 
             return { pageData, events, feedbackMessages, users, applications, nextIds };
         }
