@@ -189,28 +189,32 @@
             position: relative;
         }
 
-        .page-content-inner .card .delete-post {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            color: #b14a4a;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            opacity: 0.5;
-            transition: 0.15s;
-        }
-
-        .page-content-inner .card .delete-post:hover {
-            opacity: 1;
-            transform: scale(1.2);
-        }
-
         .page-content-inner .card h4 {
             color: #1f402a;
             margin-bottom: 6px;
             padding-right: 30px;
+        }
+
+        .page-content-inner .info-box {
+            background: #e8f4e0;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin: 20px 0;
+            border-left: 4px solid #4f8a64;
+        }
+
+        .page-content-inner .info-box p {
+            margin-bottom: 10px;
+        }
+
+        .page-content-inner .info-box .email-highlight {
+            font-weight: 600;
+            color: #1f402a;
+            background: white;
+            padding: 4px 16px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 4px;
         }
 
         /* Календарь */
@@ -466,6 +470,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .admin-panel h4 span {
@@ -474,6 +479,13 @@
             border-radius: 40px;
             font-size: 0.9rem;
             font-weight: 400;
+        }
+
+        .admin-panel .save-hint {
+            font-size: 0.8rem;
+            color: #6f8a76;
+            font-weight: 400;
+            margin-left: auto;
         }
 
         .admin-section {
@@ -606,6 +618,16 @@
 
         .admin-actions .danger-btn:hover {
             background: #ecc4c4;
+        }
+
+        .admin-actions .save-btn {
+            background: #6f9a78;
+            border-color: #5a8262;
+            color: white;
+        }
+
+        .admin-actions .save-btn:hover {
+            background: #5a8262;
         }
 
         .small-note {
@@ -887,6 +909,41 @@
             margin: 14px 0 8px 0;
             border-top: 2px dotted #d6decb;
         }
+
+        /* Список зарегистрированных пользователей */
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f6f9f3;
+            border-radius: 12px;
+            margin-bottom: 6px;
+            border: 1px solid #dce3d2;
+        }
+
+        .user-item .user-info {
+            font-weight: 450;
+            color: #1f402a;
+        }
+
+        .user-item .user-delete {
+            color: #b14a4a;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0 8px;
+            border-radius: 50%;
+            transition: 0.15s;
+            opacity: 0.6;
+        }
+
+        .user-item .user-delete:hover {
+            opacity: 1;
+            background: #f5d6d6;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -912,6 +969,8 @@
         <a href="#" data-page="pay">ВЗНОСЫ</a>
         <span class="separator">|</span>
         <a href="#" data-page="norm">УСТАВ</a>
+        <span class="separator">|</span>
+        <a href="#" data-page="registration">РЕГИСТРАЦИЯ</a>
     </div>
 
     <!-- ВТОРОЙ РЯД МЕНЮ -->
@@ -1010,6 +1069,65 @@
             <div id="chatContainer"></div>
         </div>
 
+        <!-- Регистрация -->
+        <div id="page-registration" class="page-content-inner">
+            <h2>📝 Регистрация</h2>
+            <div class="info-box">
+                <p><strong>Уважаемые посетители!</strong></p>
+                <p>Часть функционала сайта (в том числе личный кабинет и форум) доступна только подтверждённым пользователям.</p>
+                <p>Для получения учетных данных (имя пользователя и пароль) необходимо направить администратору сайта по почте заявку. Обязательны к указанию полные фамилия, имя, отчество, телефонный номер для экстренной связи, а также являетесь ли вы членом СНТ или собственником. Для формирования квитанции необходим также номер участка.</p>
+                <p>После сверки с реестром членов СНТ в случае подтверждения предоставленных данных вам в ответ будет направлено письмо со ссылкой для первого входа и изменения пароля. В дальнейшем вы сможете самостоятельно изменить пароль на странице настроек профиля в любой момент.</p>
+                <p>При неподтверждении предоставленных данных будет направлено соответствующее уведомление.</p>
+                <p style="margin-top: 12px;"><strong>Адрес для отправки заявок:</strong></p>
+                <span class="email-highlight">snt_medradiolog@list.ru</span>
+            </div>
+
+            <h3 style="margin-top: 30px; color: #2a4337; font-weight: 500;">📋 Форма заявки</h3>
+            <form id="registrationForm" class="feedback-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Фамилия <span class="required">*</span></label>
+                        <input type="text" id="regSurname" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Имя <span class="required">*</span></label>
+                        <input type="text" id="regName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Отчество</label>
+                    <input type="text" id="regPatronymic">
+                </div>
+                <div class="form-group">
+                    <label>Телефон <span class="required">*</span></label>
+                    <input type="tel" id="regPhone" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div class="form-group">
+                    <label>Номер(а) участка <span class="required">*</span></label>
+                    <input type="text" id="regPlots" placeholder="Например: 15, 42, 7А" required>
+                    <small style="color: #6f8a76;">Если несколько участков, перечислите через запятую</small>
+                </div>
+                <div class="form-group">
+                    <label>Являюсь</label>
+                    <select id="regStatus">
+                        <option value="member">Членом СНТ</option>
+                        <option value="owner">Собственником</option>
+                        <option value="both">И членом, и собственником</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Дополнительная информация</label>
+                    <textarea id="regInfo" placeholder="Любая дополнительная информация" rows="3"></textarea>
+                </div>
+                <div class="consent">
+                    <input type="checkbox" id="regConsent" required>
+                    <label for="regConsent">Я даю согласие на обработку своих персональных данных</label>
+                </div>
+                <button type="submit" class="submit-btn">📨 Отправить заявку</button>
+            </form>
+            <div id="regStatusMsg" style="margin-top: 16px; text-align: center; font-weight: 500;"></div>
+        </div>
+
         <!-- Обратная связь -->
         <div id="page-feedback" class="page-content-inner">
             <h2>📝 Обратная связь</h2>
@@ -1072,8 +1190,52 @@
 
     <!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
     <div id="adminPanel" class="admin-panel">
-        <h4>🧑‍🌾 Управление сайтом <span>редактор</span></h4>
-        
+        <h4>
+            🧑‍🌾 Управление сайтом <span>редактор</span>
+            <button id="saveToStorageBtn" class="save-btn" style="font-size:0.8rem; padding:4px 16px;">💾 Сохранить данные</button>
+            <span class="save-hint">данные в localStorage</span>
+        </h4>
+
+        <!-- Управление пользователями -->
+        <div class="admin-section">
+            <h5>👤 Управление пользователями (регистрации)</h5>
+            <div class="admin-grid">
+                <div class="admin-item">
+                    <label>Фамилия</label>
+                    <input type="text" id="adminUserSurname" placeholder="Фамилия">
+                </div>
+                <div class="admin-item">
+                    <label>Имя</label>
+                    <input type="text" id="adminUserName" placeholder="Имя">
+                </div>
+                <div class="admin-item">
+                    <label>Отчество</label>
+                    <input type="text" id="adminUserPatronymic" placeholder="Отчество">
+                </div>
+                <div class="admin-item">
+                    <label>Телефон</label>
+                    <input type="text" id="adminUserPhone" placeholder="+7 (___) ___-__-__">
+                </div>
+                <div class="admin-item">
+                    <label>Номер(а) участка</label>
+                    <input type="text" id="adminUserPlots" placeholder="15, 42, 7А">
+                </div>
+                <div class="admin-item">
+                    <label>Статус</label>
+                    <select id="adminUserStatus">
+                        <option value="member">Член СНТ</option>
+                        <option value="owner">Собственник</option>
+                        <option value="both">Член и собственник</option>
+                    </select>
+                </div>
+            </div>
+            <div class="admin-actions">
+                <button id="addUserBtn">➕ Добавить пользователя</button>
+                <button id="clearUsersBtn" class="danger-btn">🗑️ Очистить всех</button>
+            </div>
+            <div id="usersList" class="topic-list"></div>
+        </div>
+
         <!-- Управление контентом страниц -->
         <div class="admin-section">
             <h5>📝 Управление контентом страниц</h5>
@@ -1185,6 +1347,7 @@
             pageData: 'medradiolog_pageData',
             events: 'medradiolog_events',
             feedback: 'medradiolog_feedback',
+            users: 'medradiolog_users',
             nextIds: 'medradiolog_nextIds'
         };
 
@@ -1193,57 +1356,35 @@
             let pageData = {};
             let events = [];
             let feedbackMessages = [];
+            let users = [];
             let nextIds = {};
 
-            // Загружаем pageData
             const savedPageData = localStorage.getItem(STORAGE_KEYS.pageData);
             if (savedPageData) {
-                try {
-                    pageData = JSON.parse(savedPageData);
-                } catch (e) {
-                    pageData = getDefaultPageData();
-                }
-            } else {
-                pageData = getDefaultPageData();
-            }
+                try { pageData = JSON.parse(savedPageData); } catch(e) { pageData = getDefaultPageData(); }
+            } else { pageData = getDefaultPageData(); }
 
-            // Загружаем события
             const savedEvents = localStorage.getItem(STORAGE_KEYS.events);
             if (savedEvents) {
-                try {
-                    events = JSON.parse(savedEvents);
-                } catch (e) {
-                    events = getDefaultEvents();
-                }
-            } else {
-                events = getDefaultEvents();
-            }
+                try { events = JSON.parse(savedEvents); } catch(e) { events = getDefaultEvents(); }
+            } else { events = getDefaultEvents(); }
 
-            // Загружаем сообщения обратной связи
             const savedFeedback = localStorage.getItem(STORAGE_KEYS.feedback);
             if (savedFeedback) {
-                try {
-                    feedbackMessages = JSON.parse(savedFeedback);
-                } catch (e) {
-                    feedbackMessages = getDefaultFeedback();
-                }
-            } else {
-                feedbackMessages = getDefaultFeedback();
-            }
+                try { feedbackMessages = JSON.parse(savedFeedback); } catch(e) { feedbackMessages = getDefaultFeedback(); }
+            } else { feedbackMessages = getDefaultFeedback(); }
 
-            // Загружаем nextIds
+            const savedUsers = localStorage.getItem(STORAGE_KEYS.users);
+            if (savedUsers) {
+                try { users = JSON.parse(savedUsers); } catch(e) { users = getDefaultUsers(); }
+            } else { users = getDefaultUsers(); }
+
             const savedNextIds = localStorage.getItem(STORAGE_KEYS.nextIds);
             if (savedNextIds) {
-                try {
-                    nextIds = JSON.parse(savedNextIds);
-                } catch (e) {
-                    nextIds = getDefaultNextIds(pageData);
-                }
-            } else {
-                nextIds = getDefaultNextIds(pageData);
-            }
+                try { nextIds = JSON.parse(savedNextIds); } catch(e) { nextIds = getDefaultNextIds(pageData); }
+            } else { nextIds = getDefaultNextIds(pageData); }
 
-            return { pageData, events, feedbackMessages, nextIds };
+            return { pageData, events, feedbackMessages, users, nextIds };
         }
 
         // === Дефолтные данные ===
@@ -1316,6 +1457,12 @@
             ];
         }
 
+        function getDefaultUsers() {
+            return [
+                { id: 1, surname: 'Иванов', name: 'Иван', patronymic: 'Иванович', phone: '+7 (916) 111-22-33', plots: '15, 42', status: 'member' }
+            ];
+        }
+
         function getDefaultNextIds(pageData) {
             const ids = {};
             Object.keys(pageData).forEach(key => {
@@ -1330,7 +1477,25 @@
             localStorage.setItem(STORAGE_KEYS.pageData, JSON.stringify(pageData));
             localStorage.setItem(STORAGE_KEYS.events, JSON.stringify(events));
             localStorage.setItem(STORAGE_KEYS.feedback, JSON.stringify(feedbackMessages));
+            localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
             localStorage.setItem(STORAGE_KEYS.nextIds, JSON.stringify(nextIds));
+            showSaveNotification('✅ Данные сохранены в localStorage');
+        }
+
+        function showSaveNotification(msg) {
+            const status = document.getElementById('saveStatus');
+            if (status) {
+                status.textContent = msg;
+                status.style.display = 'block';
+                setTimeout(() => { status.style.display = 'none'; }, 3000);
+            } else {
+                const hint = document.querySelector('.save-hint');
+                if (hint) {
+                    const original = hint.textContent;
+                    hint.textContent = '✅ ' + msg.replace('✅ ', '');
+                    setTimeout(() => { hint.textContent = original; }, 3000);
+                }
+            }
         }
 
         // === Инициализация данных ===
@@ -1338,12 +1503,14 @@
         let pageData = loaded.pageData;
         let events = loaded.events;
         let feedbackMessages = loaded.feedbackMessages;
+        let users = loaded.users;
         let nextIds = loaded.nextIds;
 
         // === Элементы ===
         const panel = document.getElementById('adminPanel');
         const toggleBtn = document.getElementById('designToggleBtn');
         const closeBtn = document.getElementById('closeAdminBtn');
+        const saveBtn = document.getElementById('saveToStorageBtn');
         const loginOverlay = document.getElementById('loginOverlay');
         const loginUser = document.getElementById('loginUser');
         const loginPass = document.getElementById('loginPass');
@@ -1353,6 +1520,8 @@
         const pagePostsList = document.getElementById('pagePostsList');
         const feedbackMessagesContainer = document.getElementById('feedbackMessages');
         const feedbackForm = document.getElementById('feedbackForm');
+        const usersList = document.getElementById('usersList');
+        const registrationForm = document.getElementById('registrationForm');
 
         let isAuthenticated = false;
         let currentPage = 'news';
@@ -1406,6 +1575,31 @@
                     const page = this.getAttribute('data-page');
                     const id = parseInt(this.getAttribute('data-id'));
                     deletePost(page, id);
+                });
+            });
+        }
+
+        function renderUsers() {
+            if (!usersList) return;
+            if (users.length === 0) {
+                usersList.innerHTML = '<p style="color: #6f8a76; font-size:0.9rem;">Нет зарегистрированных пользователей</p>';
+                return;
+            }
+            let html = '';
+            users.forEach(user => {
+                const statusMap = { member: 'Член СНТ', owner: 'Собственник', both: 'Член и собственник' };
+                html += `
+                    <div class="user-item">
+                        <span class="user-info">${user.surname} ${user.name} ${user.patronymic || ''} | уч. ${user.plots} | ${user.phone} | ${statusMap[user.status] || user.status}</span>
+                        <button class="user-delete" data-user-id="${user.id}">✕</button>
+                    </div>
+                `;
+            });
+            usersList.innerHTML = html;
+            usersList.querySelectorAll('.user-delete').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-user-id'));
+                    deleteUser(id);
                 });
             });
         }
@@ -1584,6 +1778,47 @@
             }
         }
 
+        // === CRUD для пользователей ===
+        function addUser(surname, name, patronymic, phone, plots, status) {
+            if (!surname.trim() || !name.trim() || !phone.trim() || !plots.trim()) {
+                alert('Заполните все обязательные поля');
+                return;
+            }
+            const maxId = users.reduce((max, u) => Math.max(max, u.id || 0), 0);
+            users.push({
+                id: maxId + 1,
+                surname: surname.trim(),
+                name: name.trim(),
+                patronymic: patronymic.trim() || '',
+                phone: phone.trim(),
+                plots: plots.trim(),
+                status: status || 'member'
+            });
+            saveData();
+            renderUsers();
+            document.getElementById('adminUserSurname').value = '';
+            document.getElementById('adminUserName').value = '';
+            document.getElementById('adminUserPatronymic').value = '';
+            document.getElementById('adminUserPhone').value = '';
+            document.getElementById('adminUserPlots').value = '';
+        }
+
+        function deleteUser(id) {
+            if (confirm('Удалить этого пользователя?')) {
+                users = users.filter(item => item.id !== id);
+                saveData();
+                renderUsers();
+            }
+        }
+
+        function clearAllUsers() {
+            if (confirm('Удалить всех пользователей?')) {
+                users = [];
+                saveData();
+                renderUsers();
+            }
+        }
+
         // === CRUD для событий ===
         function addEvent(title, date, desc) {
             if (!title.trim() || !date) {
@@ -1658,6 +1893,7 @@
                 renderAdminPosts(currentAdminPage);
                 renderEventsList();
                 renderFeedbackMessages();
+                renderUsers();
             } else {
                 loginOverlay.classList.add('active');
                 loginUser.value = '';
@@ -1683,6 +1919,7 @@
                 renderAdminPosts(currentAdminPage);
                 renderEventsList();
                 renderFeedbackMessages();
+                renderUsers();
             } else {
                 loginError.classList.add('show');
                 loginPass.value = '';
@@ -1695,7 +1932,14 @@
             renderAllPages();
             renderCalendar();
             renderFeedbackMessages();
+            renderUsers();
             switchPage('news');
+
+            // Кнопка сохранения
+            saveBtn.addEventListener('click', function() {
+                saveData();
+                alert('✅ Все данные сохранены в localStorage!\n\nВы можете скопировать этот код на GitHub Pages.');
+            });
 
             // Переключатели страниц в админке
             document.querySelectorAll('#pageSelector button').forEach(btn => {
@@ -1720,6 +1964,19 @@
             document.getElementById('clearPagePostsBtn').addEventListener('click', function() {
                 clearPagePosts(currentAdminPage);
             });
+
+            // Пользователи
+            document.getElementById('addUserBtn').addEventListener('click', function() {
+                const surname = document.getElementById('adminUserSurname').value;
+                const name = document.getElementById('adminUserName').value;
+                const patronymic = document.getElementById('adminUserPatronymic').value;
+                const phone = document.getElementById('adminUserPhone').value;
+                const plots = document.getElementById('adminUserPlots').value;
+                const status = document.getElementById('adminUserStatus').value;
+                addUser(surname, name, patronymic, phone, plots, status);
+            });
+
+            document.getElementById('clearUsersBtn').addEventListener('click', clearAllUsers);
 
             // События
             document.getElementById('addEventBtn').addEventListener('click', function() {
@@ -1760,6 +2017,44 @@
                 setTimeout(() => {
                     document.getElementById('feedbackStatus').innerHTML = '';
                 }, 5000);
+            });
+
+            // Форма регистрации
+            registrationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const surname = document.getElementById('regSurname').value.trim();
+                const name = document.getElementById('regName').value.trim();
+                const patronymic = document.getElementById('regPatronymic').value.trim();
+                const phone = document.getElementById('regPhone').value.trim();
+                const plots = document.getElementById('regPlots').value.trim();
+                const status = document.getElementById('regStatus').value;
+                const info = document.getElementById('regInfo').value.trim();
+                const consent = document.getElementById('regConsent').checked;
+
+                if (!surname || !name || !phone || !plots) {
+                    document.getElementById('regStatusMsg').innerHTML = '<span style="color: #b14a4a;">❌ Заполните все обязательные поля</span>';
+                    return;
+                }
+                if (!consent) {
+                    document.getElementById('regStatusMsg').innerHTML = '<span style="color: #b14a4a;">❌ Необходимо дать согласие на обработку данных</span>';
+                    return;
+                }
+
+                // Сохраняем пользователя в админку
+                addUser(surname, name, patronymic, phone, plots, status);
+
+                // Показываем сообщение об отправке
+                document.getElementById('regStatusMsg').innerHTML = `
+                    <div style="background: #e8f4e0; border-radius: 16px; padding: 20px; text-align: left;">
+                        <p style="color: #1f402a; font-weight: 500;">✅ Заявка отправлена!</p>
+                        <p style="color: #2d4437; margin-top: 8px;">Ваша заявка на регистрацию получена. После проверки данных администратором на указанный номер телефона будет отправлено письмо с учетными данными.</p>
+                        <p style="color: #6f8a76; font-size: 0.9rem; margin-top: 8px;">Ожидайте письмо на адрес: ${document.getElementById('regEmail')?.value || 'указанный при регистрации'}</p>
+                    </div>
+                `;
+                registrationForm.reset();
+                setTimeout(() => {
+                    document.getElementById('regStatusMsg').innerHTML = '';
+                }, 8000);
             });
 
             // Админ-панель
@@ -1811,6 +2106,10 @@
             });
 
             console.log('🌱 Данные загружены из localStorage');
+            console.log('👤 Пользователей:', users.length);
+            console.log('📝 Постов:', Object.keys(pageData).reduce((sum, key) => sum + pageData[key].length, 0));
+            console.log('📅 Событий:', events.length);
+            console.log('📨 Сообщений:', feedbackMessages.length);
         }
 
         init();
