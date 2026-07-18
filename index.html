@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СНТ «Медрадиолог»</title>
     <style>
-        /* Стили (без изменений) */
         * {
             margin: 0;
             padding: 0;
@@ -1423,6 +1422,52 @@
             nextIds: 'medradiolog_nextIds'
         };
 
+        function getDefaultPageData() {
+            return {
+                news: [],
+                rules: [],
+                ads: [],
+                meetings: [],
+                court: [],
+                vote: [],
+                docs: [
+                    { id: 1, title: 'Реквизиты СНТ', text: 'ИНН: 5009123456, КПП: 500901001, ОГРН: 1165000054321' },
+                    { id: 2, title: 'Контактная информация', text: 'Адрес: Московская обл., г. Домодедово, ул. Садовая, д. 1. Тел: +7 (495) 123-45-67' }
+                ],
+                pay: [
+                    { id: 1, title: 'Членские взносы', text: '3000 ₽ / месяц с участка' },
+                    { id: 2, title: 'Целевые взносы', text: 'Ремонт дорог: 5000 ₽, Благоустройство: 2000 ₽' },
+                    { id: 3, title: 'Электроэнергия', text: '5.6 ₽ / кВт·ч' }
+                ],
+                norm: [
+                    { id: 1, title: 'Устав СНТ', text: 'Устав СНТ «Медрадиолог» (2025 г.)' },
+                    { id: 2, title: 'Правила внутреннего распорядка', text: 'Правила внутреннего распорядка (2026 г.)' }
+                ],
+                info: [
+                    { id: 1, title: '🚑 Экстренные службы', text: 'Пожарная: 112, 101. Скорая: 112, 103. Полиция: 112, 102.' },
+                    { id: 2, title: '📞 Контакты правления', text: 'Председатель: +7 (916) 123-45-67. Бухгалтер: +7 (916) 765-43-21.' }
+                ],
+                forum: [],
+                chat: [
+                    { id: 1, title: '📱 Telegram-чат', text: 'Ссылка: t.me/medradiolog_snt' },
+                    { id: 2, title: '📱 WhatsApp-группа', text: 'Ссылка: chat.whatsapp.com/medradiolog' }
+                ]
+            };
+        }
+
+        function getDefaultEvents() { return []; }
+        function getDefaultFeedback() { return []; }
+        function getDefaultUsers() { return []; }
+
+        function getDefaultNextIds(pageData) {
+            const ids = {};
+            Object.keys(pageData).forEach(key => {
+                const maxId = pageData[key].reduce((max, item) => Math.max(max, item.id || 0), 0);
+                ids[key] = maxId + 1;
+            });
+            return ids;
+        }
+
         function loadData() {
             let pageData = {}, events = [], feedbackMessages = [], users = [], applications = [], nextIds = {};
 
@@ -1459,61 +1504,6 @@
             return { pageData, events, feedbackMessages, users, applications, nextIds };
         }
 
-        function getDefaultPageData() {
-            // Все страницы пустые по умолчанию
-            return {
-                news: [],
-                rules: [],
-                ads: [],
-                meetings: [],
-                court: [],
-                vote: [],
-                docs: [
-                    { id: 1, title: 'Реквизиты СНТ', text: 'ИНН: 5009123456, КПП: 500901001, ОГРН: 1165000054321' },
-                    { id: 2, title: 'Контактная информация', text: 'Адрес: Московская обл., г. Домодедово, ул. Садовая, д. 1. Тел: +7 (495) 123-45-67' }
-                ],
-                pay: [
-                    { id: 1, title: 'Членские взносы', text: '3000 ₽ / месяц с участка' },
-                    { id: 2, title: 'Целевые взносы', text: 'Ремонт дорог: 5000 ₽, Благоустройство: 2000 ₽' },
-                    { id: 3, title: 'Электроэнергия', text: '5.6 ₽ / кВт·ч' }
-                ],
-                norm: [
-                    { id: 1, title: 'Устав СНТ', text: 'Устав СНТ «Медрадиолог» (2025 г.)' },
-                    { id: 2, title: 'Правила внутреннего распорядка', text: 'Правила внутреннего распорядка (2026 г.)' }
-                ],
-                info: [
-                    { id: 1, title: '🚑 Экстренные службы', text: 'Пожарная: 112, 101. Скорая: 112, 103. Полиция: 112, 102.' },
-                    { id: 2, title: '📞 Контакты правления', text: 'Председатель: +7 (916) 123-45-67. Бухгалтер: +7 (916) 765-43-21.' }
-                ],
-                forum: [],
-                chat: [
-                    { id: 1, title: '📱 Telegram-чат', text: 'Ссылка: t.me/medradiolog_snt' },
-                    { id: 2, title: '📱 WhatsApp-группа', text: 'Ссылка: chat.whatsapp.com/medradiolog' }
-                ]
-            };
-        }
-
-        function getDefaultEvents() {
-            return [];
-        }
-
-        function getDefaultFeedback() {
-            return [];
-        }
-
-        function getDefaultUsers() {
-            return [];
-        }
-
-        function getDefaultNextIds(pageData) {
-            const ids = {};
-            Object.keys(pageData).forEach(key => {
-                const maxId = pageData[key].reduce((max, item) => Math.max(max, item.id || 0), 0);
-                ids[key] = maxId + 1;
-            });
-            return ids;
-        }
-
         function saveData() {
             localStorage.setItem(STORAGE_KEYS.pageData, JSON.stringify(pageData));
             localStorage.setItem(STORAGE_KEYS.events, JSON.stringify(events));
@@ -1523,14 +1513,16 @@
             localStorage.setItem(STORAGE_KEYS.nextIds, JSON.stringify(nextIds));
         }
 
-        const loaded = loadData();
-        let pageData = loaded.pageData;
-        let events = loaded.events;
-        let feedbackMessages = loaded.feedbackMessages;
-        let users = loaded.users;
-        let applications = loaded.applications;
-        let nextIds = loaded.nextIds;
+        // Загружаем данные
+        let data = loadData();
+        let pageData = data.pageData;
+        let events = data.events;
+        let feedbackMessages = data.feedbackMessages;
+        let users = data.users;
+        let applications = data.applications;
+        let nextIds = data.nextIds;
 
+        // Элементы DOM
         const panel = document.getElementById('adminPanel');
         const toggleBtn = document.getElementById('designToggleBtn');
         const closeBtn = document.getElementById('closeAdminBtn');
@@ -1553,6 +1545,7 @@
         let currentPage = 'news';
         let currentAdminPage = 'news';
 
+        // === Функции рендеринга ===
         function renderPage(pageId) {
             const container = document.getElementById(`${pageId}Container`);
             if (!container) return;
@@ -1571,6 +1564,11 @@
                 `;
             });
             container.innerHTML = html;
+            // Обновляем дату
+            const dateEl = document.getElementById('newsDate');
+            if (dateEl) {
+                dateEl.textContent = 'Обновлено: ' + new Date().toLocaleDateString();
+            }
         }
 
         function renderAllPages() {
@@ -1809,6 +1807,7 @@
             });
         }
 
+        // === Переключение страниц ===
         function switchPage(pageId) {
             currentPage = pageId;
             document.querySelectorAll('.page-content-inner').forEach(el => el.classList.remove('active'));
@@ -1821,15 +1820,20 @@
                 link.classList.remove('active');
                 if (link.getAttribute('data-page') === pageId) link.classList.add('active');
             });
+            // При переключении обновляем данные
+            renderPage(pageId);
             if (pageId === 'calendar') renderCalendar();
         }
 
+        // === CRUD операции ===
         function deletePost(pageId, id) {
             if (confirm('Удалить этот пост?')) {
                 pageData[pageId] = pageData[pageId].filter(item => item.id !== id);
                 saveData();
                 renderPage(pageId);
                 renderAdminPosts(currentAdminPage);
+                // Обновляем все страницы
+                renderAllPages();
             }
         }
 
@@ -1839,6 +1843,7 @@
                 saveData();
                 renderPage(pageId);
                 renderAdminPosts(currentAdminPage);
+                renderAllPages();
             }
         }
 
@@ -1850,6 +1855,7 @@
             saveData();
             renderPage(pageId);
             renderAdminPosts(currentAdminPage);
+            renderAllPages();
             document.getElementById('postTitle').value = '';
             document.getElementById('postText').value = '';
         }
@@ -1979,6 +1985,7 @@
             }
         }
 
+        // === Авторизация ===
         function showLoginModal() {
             loginOverlay.classList.add('active');
             loginUser.value = '';
@@ -2026,6 +2033,7 @@
             }
         }
 
+        // === Инициализация ===
         function init() {
             renderAllPages();
             renderCalendar();
