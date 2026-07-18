@@ -1413,116 +1413,111 @@
 
 <script>
     (function() {
-        const STORAGE_KEYS = {
-            pageData: 'medradiolog_pageData',
-            events: 'medradiolog_events',
-            feedback: 'medradiolog_feedback',
-            users: 'medradiolog_users',
-            applications: 'medradiolog_applications',
-            nextIds: 'medradiolog_nextIds'
-        };
+        // === КЛЮЧИ ДЛЯ ХРАНЕНИЯ ===
+        const STORAGE_KEY = 'snt_medradiolog_data';
+        const VERSION_KEY = 'snt_medradiolog_version';
 
-        function getDefaultPageData() {
+        // === ЗАГРУЗКА ДАННЫХ ===
+        function loadAllData() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    // Проверяем версию
+                    const version = localStorage.getItem(VERSION_KEY) || '1.0';
+                    if (data && typeof data === 'object') {
+                        return data;
+                    }
+                }
+            } catch(e) {
+                console.log('Ошибка загрузки данных:', e);
+            }
+            return getDefaultData();
+        }
+
+        // === ДЕФОЛТНЫЕ ДАННЫЕ ===
+        function getDefaultData() {
             return {
-                news: [],
-                rules: [],
-                ads: [],
-                meetings: [],
-                court: [],
-                vote: [],
-                docs: [
-                    { id: 1, title: 'Реквизиты СНТ', text: 'ИНН: 5009123456, КПП: 500901001, ОГРН: 1165000054321' },
-                    { id: 2, title: 'Контактная информация', text: 'Адрес: Московская обл., г. Домодедово, ул. Садовая, д. 1. Тел: +7 (495) 123-45-67' }
-                ],
-                pay: [
-                    { id: 1, title: 'Членские взносы', text: '3000 ₽ / месяц с участка' },
-                    { id: 2, title: 'Целевые взносы', text: 'Ремонт дорог: 5000 ₽, Благоустройство: 2000 ₽' },
-                    { id: 3, title: 'Электроэнергия', text: '5.6 ₽ / кВт·ч' }
-                ],
-                norm: [
-                    { id: 1, title: 'Устав СНТ', text: 'Устав СНТ «Медрадиолог» (2025 г.)' },
-                    { id: 2, title: 'Правила внутреннего распорядка', text: 'Правила внутреннего распорядка (2026 г.)' }
-                ],
-                info: [
-                    { id: 1, title: '🚑 Экстренные службы', text: 'Пожарная: 112, 101. Скорая: 112, 103. Полиция: 112, 102.' },
-                    { id: 2, title: '📞 Контакты правления', text: 'Председатель: +7 (916) 123-45-67. Бухгалтер: +7 (916) 765-43-21.' }
-                ],
-                forum: [],
-                chat: [
-                    { id: 1, title: '📱 Telegram-чат', text: 'Ссылка: t.me/medradiolog_snt' },
-                    { id: 2, title: '📱 WhatsApp-группа', text: 'Ссылка: chat.whatsapp.com/medradiolog' }
-                ]
+                pageData: {
+                    news: [],
+                    rules: [],
+                    ads: [],
+                    meetings: [],
+                    court: [],
+                    vote: [],
+                    docs: [
+                        { id: 1, title: 'Реквизиты СНТ', text: 'ИНН: 5009123456, КПП: 500901001, ОГРН: 1165000054321' },
+                        { id: 2, title: 'Контактная информация', text: 'Адрес: Московская обл., г. Домодедово, ул. Садовая, д. 1. Тел: +7 (495) 123-45-67' }
+                    ],
+                    pay: [
+                        { id: 1, title: 'Членские взносы', text: '3000 ₽ / месяц с участка' },
+                        { id: 2, title: 'Целевые взносы', text: 'Ремонт дорог: 5000 ₽, Благоустройство: 2000 ₽' },
+                        { id: 3, title: 'Электроэнергия', text: '5.6 ₽ / кВт·ч' }
+                    ],
+                    norm: [
+                        { id: 1, title: 'Устав СНТ', text: 'Устав СНТ «Медрадиолог» (2025 г.)' },
+                        { id: 2, title: 'Правила внутреннего распорядка', text: 'Правила внутреннего распорядка (2026 г.)' }
+                    ],
+                    info: [
+                        { id: 1, title: '🚑 Экстренные службы', text: 'Пожарная: 112, 101. Скорая: 112, 103. Полиция: 112, 102.' },
+                        { id: 2, title: '📞 Контакты правления', text: 'Председатель: +7 (916) 123-45-67. Бухгалтер: +7 (916) 765-43-21.' }
+                    ],
+                    forum: [],
+                    chat: [
+                        { id: 1, title: '📱 Telegram-чат', text: 'Ссылка: t.me/medradiolog_snt' },
+                        { id: 2, title: '📱 WhatsApp-группа', text: 'Ссылка: chat.whatsapp.com/medradiolog' }
+                    ]
+                },
+                events: [],
+                feedbackMessages: [],
+                users: [],
+                applications: [],
+                nextIds: {}
             };
         }
 
-        function getDefaultEvents() { return []; }
-        function getDefaultFeedback() { return []; }
-        function getDefaultUsers() { return []; }
+        // === СОХРАНЕНИЕ ДАННЫХ ===
+        function saveAllData() {
+            const data = {
+                pageData: pageData,
+                events: events,
+                feedbackMessages: feedbackMessages,
+                users: users,
+                applications: applications,
+                nextIds: nextIds
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            localStorage.setItem(VERSION_KEY, '1.1');
+            // Принудительно обновляем все страницы
+            renderAllPages();
+            renderCalendar();
+            renderFeedbackMessages();
+            renderUsers();
+            renderApplications();
+            if (panel.classList.contains('active')) {
+                renderAdminPosts(currentAdminPage);
+                renderEventsList();
+            }
+        }
 
-        function getDefaultNextIds(pageData) {
-            const ids = {};
-            Object.keys(pageData).forEach(key => {
+        // === ЗАГРУЗКА ===
+        const allData = loadAllData();
+        let pageData = allData.pageData || {};
+        let events = allData.events || [];
+        let feedbackMessages = allData.feedbackMessages || [];
+        let users = allData.users || [];
+        let applications = allData.applications || [];
+        let nextIds = allData.nextIds || {};
+
+        // Инициализируем nextIds для всех страниц
+        Object.keys(pageData).forEach(key => {
+            if (!nextIds[key]) {
                 const maxId = pageData[key].reduce((max, item) => Math.max(max, item.id || 0), 0);
-                ids[key] = maxId + 1;
-            });
-            return ids;
-        }
+                nextIds[key] = maxId + 1;
+            }
+        });
 
-        function loadData() {
-            let pageData = {}, events = [], feedbackMessages = [], users = [], applications = [], nextIds = {};
-
-            try { 
-                const saved = localStorage.getItem(STORAGE_KEYS.pageData);
-                pageData = saved ? JSON.parse(saved) : getDefaultPageData();
-            } catch(e) { pageData = getDefaultPageData(); }
-            
-            try { 
-                const saved = localStorage.getItem(STORAGE_KEYS.events);
-                events = saved ? JSON.parse(saved) : getDefaultEvents();
-            } catch(e) { events = getDefaultEvents(); }
-            
-            try { 
-                const saved = localStorage.getItem(STORAGE_KEYS.feedback);
-                feedbackMessages = saved ? JSON.parse(saved) : getDefaultFeedback();
-            } catch(e) { feedbackMessages = getDefaultFeedback(); }
-            
-            try { 
-                const saved = localStorage.getItem(STORAGE_KEYS.users);
-                users = saved ? JSON.parse(saved) : getDefaultUsers();
-            } catch(e) { users = getDefaultUsers(); }
-            
-            try { 
-                const saved = localStorage.getItem(STORAGE_KEYS.applications);
-                applications = saved ? JSON.parse(saved) : [];
-            } catch(e) { applications = []; }
-            
-            try { 
-                const saved = localStorage.getItem(STORAGE_KEYS.nextIds);
-                nextIds = saved ? JSON.parse(saved) : getDefaultNextIds(pageData);
-            } catch(e) { nextIds = getDefaultNextIds(pageData); }
-
-            return { pageData, events, feedbackMessages, users, applications, nextIds };
-        }
-
-        function saveData() {
-            localStorage.setItem(STORAGE_KEYS.pageData, JSON.stringify(pageData));
-            localStorage.setItem(STORAGE_KEYS.events, JSON.stringify(events));
-            localStorage.setItem(STORAGE_KEYS.feedback, JSON.stringify(feedbackMessages));
-            localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
-            localStorage.setItem(STORAGE_KEYS.applications, JSON.stringify(applications));
-            localStorage.setItem(STORAGE_KEYS.nextIds, JSON.stringify(nextIds));
-        }
-
-        // Загружаем данные
-        let data = loadData();
-        let pageData = data.pageData;
-        let events = data.events;
-        let feedbackMessages = data.feedbackMessages;
-        let users = data.users;
-        let applications = data.applications;
-        let nextIds = data.nextIds;
-
-        // Элементы DOM
+        // === DOM ЭЛЕМЕНТЫ ===
         const panel = document.getElementById('adminPanel');
         const toggleBtn = document.getElementById('designToggleBtn');
         const closeBtn = document.getElementById('closeAdminBtn');
@@ -1545,7 +1540,7 @@
         let currentPage = 'news';
         let currentAdminPage = 'news';
 
-        // === Функции рендеринга ===
+        // === ФУНКЦИИ РЕНДЕРИНГА ===
         function renderPage(pageId) {
             const container = document.getElementById(`${pageId}Container`);
             if (!container) return;
@@ -1564,7 +1559,6 @@
                 `;
             });
             container.innerHTML = html;
-            // Обновляем дату
             const dateEl = document.getElementById('newsDate');
             if (dateEl) {
                 dateEl.textContent = 'Обновлено: ' + new Date().toLocaleDateString();
@@ -1664,7 +1658,7 @@
                     const index = parseInt(this.getAttribute('data-app-index'));
                     if (confirm('Удалить эту заявку?')) {
                         applications.splice(index, 1);
-                        saveData();
+                        saveAllData();
                         renderApplications();
                     }
                 });
@@ -1686,7 +1680,7 @@
                     status: app.status || 'member'
                 });
                 applications.splice(index, 1);
-                saveData();
+                saveAllData();
                 renderUsers();
                 renderApplications();
                 alert('✅ Пользователь подтверждён и добавлен в список!');
@@ -1807,7 +1801,7 @@
             });
         }
 
-        // === Переключение страниц ===
+        // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
         function switchPage(pageId) {
             currentPage = pageId;
             document.querySelectorAll('.page-content-inner').forEach(el => el.classList.remove('active'));
@@ -1820,30 +1814,26 @@
                 link.classList.remove('active');
                 if (link.getAttribute('data-page') === pageId) link.classList.add('active');
             });
-            // При переключении обновляем данные
             renderPage(pageId);
             if (pageId === 'calendar') renderCalendar();
         }
 
-        // === CRUD операции ===
+        // === CRUD ОПЕРАЦИИ ===
         function deletePost(pageId, id) {
             if (confirm('Удалить этот пост?')) {
                 pageData[pageId] = pageData[pageId].filter(item => item.id !== id);
-                saveData();
+                saveAllData();
                 renderPage(pageId);
                 renderAdminPosts(currentAdminPage);
-                // Обновляем все страницы
-                renderAllPages();
             }
         }
 
         function clearPagePosts(pageId) {
             if (confirm(`Удалить все посты на странице "${pageId}"?`)) {
                 pageData[pageId] = [];
-                saveData();
+                saveAllData();
                 renderPage(pageId);
                 renderAdminPosts(currentAdminPage);
-                renderAllPages();
             }
         }
 
@@ -1852,10 +1842,9 @@
             const id = nextIds[pageId] || 1;
             pageData[pageId].push({ id: id, title: title.trim(), text: text.trim() });
             nextIds[pageId] = id + 1;
-            saveData();
+            saveAllData();
             renderPage(pageId);
             renderAdminPosts(currentAdminPage);
-            renderAllPages();
             document.getElementById('postTitle').value = '';
             document.getElementById('postText').value = '';
         }
@@ -1875,7 +1864,7 @@
                 plots: plots.trim(),
                 status: status || 'member'
             });
-            saveData();
+            saveAllData();
             renderUsers();
             document.getElementById('adminUserSurname').value = '';
             document.getElementById('adminUserName').value = '';
@@ -1887,7 +1876,7 @@
         function deleteUser(id) {
             if (confirm('Удалить этого пользователя?')) {
                 users = users.filter(item => item.id !== id);
-                saveData();
+                saveAllData();
                 renderUsers();
             }
         }
@@ -1895,7 +1884,7 @@
         function clearAllUsers() {
             if (confirm('Удалить всех пользователей?')) {
                 users = [];
-                saveData();
+                saveAllData();
                 renderUsers();
             }
         }
@@ -1904,7 +1893,7 @@
             if (!title.trim() || !date) { alert('Заполните название и дату'); return; }
             const maxId = events.reduce((max, e) => Math.max(max, e.id || 0), 0);
             events.push({ id: maxId + 1, title: title.trim(), date: date, description: desc.trim() || '' });
-            saveData();
+            saveAllData();
             renderCalendar();
             renderEventsList();
             document.getElementById('eventTitle').value = '';
@@ -1915,7 +1904,7 @@
         function deleteEvent(id) {
             if (confirm('Удалить это событие?')) {
                 events = events.filter(item => item.id !== id);
-                saveData();
+                saveAllData();
                 renderCalendar();
                 renderEventsList();
             }
@@ -1924,7 +1913,7 @@
         function clearAllEvents() {
             if (confirm('Удалить все события?')) {
                 events = [];
-                saveData();
+                saveAllData();
                 renderCalendar();
                 renderEventsList();
             }
@@ -1942,14 +1931,14 @@
                 email: data.email,
                 message: data.message
             });
-            saveData();
+            saveAllData();
             renderFeedbackMessages();
         }
 
         function deleteFeedback(id) {
             if (confirm('Удалить это сообщение?')) {
                 feedbackMessages = feedbackMessages.filter(item => item.id !== id);
-                saveData();
+                saveAllData();
                 renderFeedbackMessages();
             }
         }
@@ -1957,7 +1946,7 @@
         function clearAllFeedback() {
             if (confirm('Удалить все сообщения?')) {
                 feedbackMessages = [];
-                saveData();
+                saveAllData();
                 renderFeedbackMessages();
             }
         }
@@ -1973,19 +1962,19 @@
                 info: data.info || '',
                 date: new Date().toISOString()
             });
-            saveData();
+            saveAllData();
             renderApplications();
         }
 
         function clearAllApplications() {
             if (confirm('Удалить все заявки?')) {
                 applications = [];
-                saveData();
+                saveAllData();
                 renderApplications();
             }
         }
 
-        // === Авторизация ===
+        // === АВТОРИЗАЦИЯ ===
         function showLoginModal() {
             loginOverlay.classList.add('active');
             loginUser.value = '';
@@ -2033,7 +2022,7 @@
             }
         }
 
-        // === Инициализация ===
+        // === ИНИЦИАЛИЗАЦИЯ ===
         function init() {
             renderAllPages();
             renderCalendar();
@@ -2042,11 +2031,13 @@
             renderApplications();
             switchPage('news');
 
+            // Кнопка сохранения
             saveBtn.addEventListener('click', function() {
-                saveData();
-                alert('✅ Все данные сохранены в localStorage!');
+                saveAllData();
+                alert('✅ Все данные сохранены в localStorage!\n\nОбновите страницу у других пользователей, чтобы увидеть изменения.');
             });
 
+            // Вход/выход
             loginHeaderBtn.addEventListener('click', function() {
                 if (isAuthenticated) {
                     logout();
@@ -2075,6 +2066,7 @@
                 }
             });
 
+            // Кнопка KolaDesign
             toggleBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 if (isAuthenticated) {
@@ -2094,6 +2086,7 @@
                 }
             });
 
+            // Переключатели страниц в админке
             document.querySelectorAll('#pageSelector button').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('#pageSelector button').forEach(b => b.classList.remove('active'));
@@ -2105,6 +2098,7 @@
                 });
             });
 
+            // Добавление поста
             document.getElementById('addPostBtn').addEventListener('click', function() {
                 addPost(currentAdminPage, document.getElementById('postTitle').value, document.getElementById('postText').value);
             });
@@ -2113,6 +2107,7 @@
                 clearPagePosts(currentAdminPage);
             });
 
+            // Пользователи
             document.getElementById('addUserBtn').addEventListener('click', function() {
                 addUser(
                     document.getElementById('adminUserSurname').value,
@@ -2127,6 +2122,7 @@
             document.getElementById('clearUsersBtn').addEventListener('click', clearAllUsers);
             document.getElementById('clearAppsBtn').addEventListener('click', clearAllApplications);
 
+            // События
             document.getElementById('addEventBtn').addEventListener('click', function() {
                 addEvent(
                     document.getElementById('eventTitle').value,
@@ -2138,6 +2134,7 @@
             document.getElementById('clearEventsBtn').addEventListener('click', clearAllEvents);
             document.getElementById('clearFeedbackBtn').addEventListener('click', clearAllFeedback);
 
+            // Форма обратной связи
             feedbackForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const surname = document.getElementById('fbSurname').value.trim();
@@ -2164,6 +2161,7 @@
                 setTimeout(() => { document.getElementById('feedbackStatus').innerHTML = ''; }, 5000);
             });
 
+            // Форма регистрации
             registrationForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const surname = document.getElementById('regSurname').value.trim();
@@ -2195,10 +2193,12 @@
                 setTimeout(() => { document.getElementById('regStatusMsg').innerHTML = ''; }, 8000);
             });
 
+            // Кнопка "Наверх"
             document.getElementById('upBtn').addEventListener('click', function() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
+            // Меню
             document.querySelectorAll('.top-menu a, .sub-menu a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -2214,6 +2214,7 @@
             console.log('📅 Событий:', events.length);
             console.log('📨 Сообщений:', feedbackMessages.length);
             console.log('🔐 Логин: admin, пароль: admin');
+            console.log('📌 ВАЖНО: Данные хранятся в localStorage браузера. Чтобы изменения видели все пользователи, нужно использовать сервер.');
         }
 
         init();
