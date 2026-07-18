@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>СНТ «Медрадиолог»</title>
+    <title>Технические работы</title>
     <style>
         * {
             margin: 0;
@@ -12,2213 +12,327 @@
         }
 
         body {
-            background: #f2f0ea;
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
-            padding: 30px 20px;
-            color: #1e2e26;
-            line-height: 1.5;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #fffffffa;
-            border-radius: 32px 32px 24px 24px;
-            box-shadow: 0 16px 40px rgba(0, 20, 10, 0.08);
-            padding: 32px 32px 0 32px;
-            border: 1px solid #e6e2d8;
-        }
-
-        .header {
-            border-bottom: 2px solid #d9d4c5;
-            padding-bottom: 18px;
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 500;
-            letter-spacing: -0.4px;
-            color: #2a4337;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 8px 14px;
+            justify-content: center;
+            background: linear-gradient(145deg, #f5f7fa 0%, #e6ecf5 100%);
+            padding: 1.5rem;
         }
 
-        .header h1 .light {
-            font-weight: 300;
-            font-size: 1.5rem;
-            color: #587a63;
-            background: #edf3e7;
-            padding: 0 18px;
-            border-radius: 60px;
-            letter-spacing: 0.2px;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .login-btn-header {
-            background: #d3e2c6;
-            border: 1px solid #b8ceaa;
-            padding: 8px 24px;
-            border-radius: 60px;
-            font-weight: 500;
-            color: #1d3a28;
-            cursor: pointer;
-            transition: 0.15s;
-            font-size: 0.9rem;
-        }
-
-        .login-btn-header:hover {
-            background: #c0d6b0;
-            transform: scale(1.02);
-        }
-
-        .login-btn-header.logged-in {
-            background: #6f9a78;
-            color: white;
-            border-color: #5a8262;
-        }
-
-        .top-menu {
-            background: #e8efe2;
-            border-radius: 60px;
-            padding: 8px 20px;
-            margin: 16px 0 20px 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px 16px;
-            align-items: center;
-            border: 1px solid #d0ddc4;
-        }
-
-        .top-menu a {
-            color: #1d3d2b;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 6px 14px;
-            border-radius: 30px;
-            transition: 0.15s;
-            font-size: 0.95rem;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .top-menu a:hover {
-            background: #d4e2c8;
-            color: #0f2b1c;
-            transform: scale(1.02);
-        }
-
-        .top-menu a.active {
-            background: #c0d6b0;
-            color: #0f2b1c;
-            font-weight: 600;
-        }
-
-        .top-menu .separator {
-            color: #8aaa8a;
-            user-select: none;
-        }
-
-        .sub-menu {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 12px;
-            padding: 6px 0 12px 0;
-            border-bottom: 1px solid #dce3d2;
-            margin-bottom: 16px;
-        }
-
-        .sub-menu a {
-            color: #3a5a47;
-            text-decoration: none;
-            font-weight: 450;
-            padding: 4px 12px;
-            border-radius: 20px;
-            transition: 0.15s;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .sub-menu a:hover {
-            background: #e8efe2;
-            color: #1a3f2e;
-        }
-
-        .sub-menu a.active {
-            background: #d4e2c8;
-            font-weight: 500;
-        }
-
-        .page-content {
-            display: none;
-            padding: 20px 0 10px 0;
-            margin: 10px 0;
-            border-top: 2px solid #d6decb;
-        }
-
-        .page-content.active {
-            display: block;
-        }
-
-        .page-content-inner {
-            display: none;
-        }
-
-        .page-content-inner.active {
-            display: block;
-        }
-
-        .page-content-inner h2 {
-            color: #2a4337;
-            font-weight: 500;
-            font-size: 1.8rem;
-            margin-bottom: 16px;
-        }
-
-        .page-content-inner .date {
-            color: #6f8a76;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-
-        .page-content-inner p {
-            margin-bottom: 12px;
-            color: #2d4437;
-            font-size: 1.05rem;
-        }
-
-        .page-content-inner ul {
-            margin-left: 24px;
-            margin-bottom: 12px;
-        }
-
-        .page-content-inner ul li {
-            margin-bottom: 6px;
-            color: #2d4437;
-        }
-
-        .page-content-inner .card {
-            background: #f6f9f3;
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin-bottom: 16px;
-            border-left: 4px solid #8fb389;
-            position: relative;
-        }
-
-        .page-content-inner .card h4 {
-            color: #1f402a;
-            margin-bottom: 6px;
-            padding-right: 30px;
-        }
-
-        .page-content-inner .info-box {
-            background: #e8f4e0;
-            border-radius: 16px;
-            padding: 24px 28px;
-            margin: 20px 0;
-            border-left: 4px solid #4f8a64;
-        }
-
-        .page-content-inner .info-box p {
-            margin-bottom: 10px;
-        }
-
-        .page-content-inner .info-box .email-highlight {
-            font-weight: 600;
-            color: #1f402a;
-            background: white;
-            padding: 4px 16px;
-            border-radius: 30px;
-            display: inline-block;
-            margin-top: 4px;
-        }
-
-        .calendar-container {
-            background: #f6f9f3;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .calendar-header h3 {
-            color: #1f402a;
-            font-weight: 500;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
+        .maintenance-card {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 3rem;
+            padding: 3.5rem 2.8rem;
+            box-shadow: 
+                0 20px 40px -12px rgba(0, 20, 40, 0.25),
+                0 8px 24px -6px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             text-align: center;
+            transition: transform 0.2s ease;
         }
 
-        .calendar-grid .weekday {
-            font-weight: 600;
-            color: #2a4337;
-            padding: 8px 0;
+        .maintenance-card:hover {
+            transform: translateY(-2px);
         }
 
-        .calendar-grid .day {
-            padding: 8px 4px;
-            border-radius: 8px;
-            background: white;
-            transition: 0.15s;
-            cursor: default;
+        .icon-wrapper {
+            margin-bottom: 1.8rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .gear-icon {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            background: #2c3e50;
+            border-radius: 50%;
             position: relative;
+            box-shadow: 0 10px 18px -6px rgba(44, 62, 80, 0.3);
         }
 
-        .calendar-grid .day:hover {
-            background: #e8f0e2;
+        .gear-icon::before,
+        .gear-icon::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: #f39c12;
         }
 
-        .calendar-grid .day.empty {
-            background: transparent;
+        .gear-icon::before {
+            width: 30px;
+            height: 30px;
+            background: #ecf0f1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset 0 0 0 4px #2c3e50;
         }
 
-        .calendar-grid .day.has-event {
-            background: #d4e2c8;
+        .gear-icon::after {
+            width: 14px;
+            height: 14px;
+            background: #2c3e50;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .gear-teeth {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .gear-teeth span {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #2c3e50;
+            border-radius: 4px;
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+        }
+
+        .gear-teeth span:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-36px); }
+        .gear-teeth span:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg) translateY(-36px); }
+        .gear-teeth span:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg) translateY(-36px); }
+        .gear-teeth span:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translateY(-36px); }
+        .gear-teeth span:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translateY(-36px); }
+        .gear-teeth span:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translateY(-36px); }
+        .gear-teeth span:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translateY(-36px); }
+        .gear-teeth span:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translateY(-36px); }
+
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #1e2a3a;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+            border-radius: 4px;
+            margin: 1.2rem auto 1.8rem;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: rgba(243, 156, 18, 0.08);
+            padding: 1.2rem 1.8rem;
+            border-radius: 2rem;
+            border-left: 4px solid #f39c12;
+            margin-bottom: 2.2rem;
+            font-weight: 450;
+            text-align: left;
+        }
+
+        .message strong {
+            color: #c0392b;
             font-weight: 600;
         }
 
-        .calendar-grid .day.has-event::after {
-            content: "•";
-            color: #4f8a64;
-            position: absolute;
-            bottom: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.2rem;
-        }
-
-        .feedback-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .feedback-form .form-group {
-            margin-bottom: 16px;
-        }
-
-        .feedback-form label {
-            display: block;
-            font-weight: 450;
-            color: #2f5240;
-            margin-bottom: 4px;
+        .status-badge {
+            display: inline-block;
+            background: #e67e22;
+            color: white;
+            font-weight: 600;
             font-size: 0.9rem;
-        }
-
-        .feedback-form label .required {
-            color: #b14a4a;
-        }
-
-        .feedback-form input,
-        .feedback-form textarea,
-        .feedback-form select {
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: 40px;
-            border: 1px solid #c8d9bb;
-            font-size: 1rem;
-            transition: 0.1s;
-            font-family: inherit;
-            background: white;
-        }
-
-        .feedback-form textarea {
-            border-radius: 16px;
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .feedback-form input:focus,
-        .feedback-form textarea:focus,
-        .feedback-form select:focus {
-            border-color: #6f9a78;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(80, 140, 90, 0.15);
-        }
-
-        .feedback-form .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .feedback-form .consent {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin: 16px 0;
-        }
-
-        .feedback-form .consent input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-top: 2px;
-            flex-shrink: 0;
-            accent-color: #6f9a78;
-        }
-
-        .feedback-form .consent label {
-            font-size: 0.9rem;
-            color: #4c6b5a;
-            cursor: pointer;
-        }
-
-        .feedback-form .submit-btn {
-            background: #d3e2c6;
-            border: none;
-            padding: 12px 40px;
-            border-radius: 60px;
-            font-weight: 500;
-            color: #1d3a28;
-            cursor: pointer;
-            transition: 0.1s;
-            border: 1px solid #b8ceaa;
-            font-size: 1rem;
-            width: 100%;
-        }
-
-        .feedback-form .submit-btn:hover {
-            background: #c0d6b0;
-        }
-
-        .footer {
-            margin-top: 28px;
-            padding: 18px 0 12px 0;
-            border-top: 2px solid #d6dccb;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            align-items: center;
-            font-size: 0.95rem;
-            color: #3a5a47;
-            background: white;
-            border-radius: 0 0 24px 24px;
-        }
-
-        .footer .copy {
-            display: flex;
-            align-items: center;
-            gap: 6px 16px;
-            flex-wrap: wrap;
-        }
-
-        .footer .copy .year {
-            font-weight: 500;
-        }
-
-        .design-btn {
-            background: #e3eee0;
-            padding: 6px 18px;
-            border-radius: 60px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #174129;
-            border: none;
-            cursor: pointer;
-            transition: 0.15s;
-            border: 1px solid #bcd0b0;
             letter-spacing: 0.3px;
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(230, 126, 34, 0.2);
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .design-btn:hover {
-            background: #d0e2c2;
-            box-shadow: 0 4px 8px rgba(60, 100, 60, 0.08);
-            transform: scale(1.02);
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: #d5dce6;
+            border-radius: 12px;
+            margin: 1.8rem 0 1rem;
+            overflow: hidden;
         }
 
-        .design-btn:active {
-            background: #bcd0ae;
-            transform: scale(0.97);
+        .progress-bar {
+            height: 100%;
+            width: 70%;
+            background: linear-gradient(90deg, #f39c12, #e67e22, #d35400);
+            border-radius: 12px;
+            animation: shimmer 2.4s infinite ease-in-out;
+            background-size: 200% 100%;
         }
 
-        .footer .up {
-            background: #dee8d6;
-            padding: 6px 20px;
-            border-radius: 60px;
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .progress-label {
+            font-size: 0.85rem;
+            color: #4a5a6e;
+            margin-top: 0.5rem;
             font-weight: 500;
-            font-size: 0.9rem;
-            transition: 0.15s;
-            cursor: pointer;
-            color: #1c3d28;
+        }
+
+        .footer-note {
+            margin-top: 2.2rem;
+            font-size: 0.95rem;
+            color: #546a7e;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.2rem 1.8rem;
+        }
+
+        .footer-note span {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            border: 1px solid #c2d4b4;
         }
 
-        .footer .up:hover {
-            background: #cdddc0;
-        }
-
-        .admin-panel {
-            background: #f4f9f0;
-            border-radius: 28px;
-            padding: 22px 28px 28px 28px;
-            margin: 18px 0 12px 0;
-            border: 1px solid #cbdcc0;
-            box-shadow: inset 0 2px 10px rgba(60, 80, 50, 0.04);
-            display: none;
-            transition: 0.3s ease;
-        }
-
-        .admin-panel.active {
-            display: block;
-        }
-
-        .admin-panel h4 {
-            font-weight: 500;
+        .footer-note i {
+            font-style: normal;
             font-size: 1.2rem;
-            color: #1f402a;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
         }
 
-        .admin-panel h4 span {
-            background: #c5dbb6;
-            padding: 0 14px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            font-weight: 400;
-        }
-
-        .admin-panel .save-hint {
-            font-size: 0.8rem;
-            color: #6f8a76;
-            font-weight: 400;
-            margin-left: auto;
-        }
-
-        .admin-section {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid #dce3d2;
-        }
-
-        .admin-section h5 {
+        .contact-link {
+            color: #2c3e50;
+            text-decoration: none;
             font-weight: 500;
-            color: #1f402a;
-            margin-bottom: 12px;
-            font-size: 1.1rem;
+            border-bottom: 2px dotted rgba(44, 62, 80, 0.25);
+            transition: border-color 0.2s;
         }
 
-        .admin-section .page-selector {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 16px;
+        .contact-link:hover {
+            border-bottom-color: #e67e22;
         }
 
-        .admin-section .page-selector button {
-            background: #e8efe2;
-            border: 1px solid #c8d9bb;
-            padding: 6px 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            color: #1d3d2b;
-            transition: 0.15s;
-        }
-
-        .admin-section .page-selector button:hover {
-            background: #d4e2c8;
-        }
-
-        .admin-section .page-selector button.active {
-            background: #c0d6b0;
-            font-weight: 600;
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 14px 20px;
-        }
-
-        .admin-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .admin-item label {
-            font-weight: 450;
-            font-size: 0.85rem;
-            color: #2f5240;
-            letter-spacing: 0.2px;
-        }
-
-        .admin-item input,
-        .admin-item textarea,
-        .admin-item select {
-            padding: 8px 12px;
-            border-radius: 40px;
-            border: 1px solid #c8d9bb;
-            background: white;
-            font-size: 0.9rem;
-            transition: 0.1s;
-            font-family: inherit;
-        }
-
-        .admin-item textarea {
-            border-radius: 16px;
-            min-height: 60px;
-            resize: vertical;
-        }
-
-        .admin-item input:focus,
-        .admin-item textarea:focus,
-        .admin-item select:focus {
-            border-color: #6f9a78;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(80, 140, 90, 0.15);
-        }
-
-        .admin-actions {
-            margin-top: 16px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .admin-actions button {
-            background: #d3e2c6;
-            border: none;
-            padding: 8px 24px;
-            border-radius: 60px;
-            font-weight: 500;
-            color: #1d3a28;
-            cursor: pointer;
-            transition: 0.1s;
-            border: 1px solid #b8ceaa;
-            font-size: 0.9rem;
-        }
-
-        .admin-actions button:hover {
-            background: #c0d6b0;
-        }
-
-        .admin-actions .close-panel {
-            background: #e7e3d8;
-            border-color: #c7c0b0;
-            color: #3e4d3a;
-        }
-
-        .admin-actions .close-panel:hover {
-            background: #dad5c7;
-        }
-
-        .admin-actions .danger-btn {
-            background: #f5d6d6;
-            border-color: #d4a0a0;
-            color: #7a3030;
-        }
-
-        .admin-actions .danger-btn:hover {
-            background: #ecc4c4;
-        }
-
-        .admin-actions .save-btn {
-            background: #6f9a78;
-            border-color: #5a8262;
-            color: white;
-        }
-
-        .admin-actions .save-btn:hover {
-            background: #5a8262;
-        }
-
-        .small-note {
-            font-size: 0.8rem;
-            color: #708d72;
-            margin-top: 6px;
-            font-style: italic;
-            border-top: 1px solid #dae3cf;
-            padding-top: 8px;
-            text-align: right;
-        }
-
-        .topic-list {
-            margin-top: 10px;
-        }
-
-        .topic-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background: #f6f9f3;
-            border-radius: 12px;
-            margin-bottom: 6px;
-            border: 1px solid #dce3d2;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .topic-item .topic-name {
-            font-weight: 450;
-            color: #1f402a;
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .topic-item .topic-delete {
-            color: #b14a4a;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            padding: 0 8px;
-            border-radius: 50%;
-            transition: 0.15s;
-            opacity: 0.6;
-        }
-
-        .topic-item .topic-delete:hover {
-            opacity: 1;
-            background: #f5d6d6;
-            transform: scale(1.1);
-        }
-
-        .topic-item .topic-status {
-            font-size: 0.8rem;
-            padding: 2px 12px;
-            border-radius: 30px;
-            margin-right: 4px;
-        }
-
-        .topic-item .topic-status.pending {
-            background: #f5e6b0;
-            color: #7a6a20;
-        }
-
-        .topic-item .topic-status.approved {
-            background: #b0d4b0;
-            color: #1a5a2a;
-        }
-
-        .topic-item .approve-btn {
-            background: #6f9a78;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 2px 12px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: 0.15s;
-        }
-
-        .topic-item .approve-btn:hover {
-            background: #5a8262;
-        }
-
-        .feedback-message {
-            background: white;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            border: 1px solid #dce3d2;
-        }
-
-        .feedback-message .msg-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: #6f8a76;
-        }
-
-        .feedback-message .msg-header strong {
-            color: #1f402a;
-        }
-
-        .feedback-message .msg-text {
-            color: #2d4437;
-        }
-
-        .feedback-message .msg-delete {
-            color: #b14a4a;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            padding: 0 8px;
-        }
-
-        .feedback-message .msg-delete:hover {
-            text-decoration: underline;
-        }
-
-        .login-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .login-overlay.active {
-            display: flex;
-        }
-
-        .login-modal {
-            background: white;
-            padding: 40px 36px;
-            border-radius: 32px;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 1px solid #d4e0ca;
-        }
-
-        .login-modal h3 {
-            font-weight: 500;
-            color: #1f402a;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-            text-align: center;
-        }
-
-        .login-modal label {
-            display: block;
-            font-weight: 450;
-            color: #2f5240;
-            margin-top: 14px;
-            margin-bottom: 4px;
-            font-size: 0.9rem;
-        }
-
-        .login-modal input {
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: 40px;
-            border: 1px solid #c8d9bb;
-            font-size: 1rem;
-            transition: 0.1s;
-            font-family: inherit;
-        }
-
-        .login-modal input:focus {
-            border-color: #6f9a78;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(80, 140, 90, 0.15);
-        }
-
-        .login-modal .login-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
-            justify-content: flex-end;
-        }
-
-        .login-modal .login-actions button {
-            padding: 10px 28px;
-            border-radius: 60px;
-            border: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        .login-modal .login-actions .login-btn {
-            background: #d3e2c6;
-            color: #1d3a28;
-            border: 1px solid #b8ceaa;
-        }
-
-        .login-modal .login-actions .login-btn:hover {
-            background: #c0d6b0;
-        }
-
-        .login-modal .login-actions .cancel-btn {
-            background: #e7e3d8;
-            color: #3e4d3a;
-            border: 1px solid #c7c0b0;
-        }
-
-        .login-modal .login-actions .cancel-btn:hover {
-            background: #dad5c7;
-        }
-
-        .login-error {
-            color: #b14a4a;
-            font-size: 0.9rem;
-            margin-top: 12px;
-            text-align: center;
-            display: none;
-        }
-
-        .login-error.show {
-            display: block;
-        }
-
-        .user-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background: #f6f9f3;
-            border-radius: 12px;
-            margin-bottom: 6px;
-            border: 1px solid #dce3d2;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .user-item .user-info {
-            font-weight: 450;
-            color: #1f402a;
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .user-item .user-delete {
-            color: #b14a4a;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            padding: 0 8px;
-            border-radius: 50%;
-            transition: 0.15s;
-            opacity: 0.6;
-        }
-
-        .user-item .user-delete:hover {
-            opacity: 1;
-            background: #f5d6d6;
-            transform: scale(1.1);
-        }
-
-        .user-item .user-status {
-            font-size: 0.8rem;
-            padding: 2px 12px;
-            border-radius: 30px;
-            margin-right: 4px;
-        }
-
-        .user-item .user-status.pending {
-            background: #f5e6b0;
-            color: #7a6a20;
-        }
-
-        .user-item .user-status.approved {
-            background: #b0d4b0;
-            color: #1a5a2a;
-        }
-
-        .divider-light {
-            margin: 14px 0 8px 0;
-            border-top: 2px dotted #d6decb;
-        }
-
-        @media (max-width: 700px) {
-            .container {
-                padding: 20px 16px 0 16px;
+        /* responsive */
+        @media (max-width: 550px) {
+            .maintenance-card {
+                padding: 2.2rem 1.5rem;
+                border-radius: 2rem;
             }
-            .header h1 {
-                font-size: 2rem;
+            .main-title {
+                font-size: 2.2rem;
             }
-            .header h1 .light {
-                font-size: 1.2rem;
-                padding: 0 12px;
+            .subtitle {
+                font-size: 1.1rem;
             }
-            .header {
+            .message {
+                font-size: 1rem;
+                padding: 1rem 1.2rem;
+            }
+            .gear-icon {
+                width: 64px;
+                height: 64px;
+            }
+            .gear-teeth span {
+                width: 12px;
+                height: 12px;
+                transform: translate(-50%, -50%) rotate(0deg) translateY(-28px);
+            }
+            .gear-teeth span:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-28px); }
+            .gear-teeth span:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg) translateY(-28px); }
+            .gear-teeth span:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg) translateY(-28px); }
+            .gear-teeth span:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translateY(-28px); }
+            .gear-teeth span:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translateY(-28px); }
+            .gear-teeth span:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translateY(-28px); }
+            .gear-teeth span:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translateY(-28px); }
+            .gear-teeth span:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translateY(-28px); }
+            .footer-note {
                 flex-direction: column;
-                align-items: stretch;
-                gap: 8px;
-            }
-            .header-actions {
-                justify-content: flex-end;
-            }
-            .top-menu {
-                padding: 6px 12px;
-                gap: 4px 10px;
-                border-radius: 30px;
-            }
-            .top-menu a {
-                font-size: 0.85rem;
-                padding: 4px 10px;
-            }
-            .sub-menu {
-                gap: 2px 8px;
-            }
-            .sub-menu a {
-                font-size: 0.8rem;
-                padding: 3px 8px;
-            }
-            .footer {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 14px;
-            }
-            .footer .up {
-                align-self: flex-end;
-            }
-            .admin-grid {
-                grid-template-columns: 1fr;
-            }
-            .login-modal {
-                padding: 30px 24px;
-            }
-            .feedback-form .form-row {
-                grid-template-columns: 1fr;
-            }
-            .calendar-grid {
-                font-size: 0.85rem;
+                gap: 0.6rem;
             }
         }
 
-        @media (max-width: 450px) {
-            .top-menu {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 2px;
-                border-radius: 20px;
-            }
-            .top-menu a {
-                text-align: center;
-                padding: 6px;
-            }
-            .top-menu .separator {
-                display: none;
-            }
-            .sub-menu {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .sub-menu a {
-                text-align: center;
-            }
-            .calendar-grid {
-                font-size: 0.75rem;
-            }
-            .calendar-grid .day {
-                padding: 4px 2px;
+        @media (prefers-reduced-motion: reduce) {
+            .progress-bar {
+                animation: none;
+                width: 70%;
             }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1 id="siteTitle">
-            СНТ «Медрадиолог»
-            <span class="light">🌱 садоводство</span>
-        </h1>
-        <div class="header-actions">
-            <button id="loginHeaderBtn" class="login-btn-header">🔐 Вход</button>
+    <div class="maintenance-card" role="main" aria-labelledby="main-title">
+        <div class="icon-wrapper" aria-hidden="true">
+            <div class="gear-icon">
+                <div class="gear-teeth">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+
+        <h1 id="main-title" class="main-title">Сайт закрыт</h1>
+        <p class="subtitle">по техническим причинам</p>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="status-badge">🔧 плановые работы</div>
+
+        <div class="message">
+            <strong>⚙️ Уважаемые посетители!</strong><br>
+            В настоящий момент сайт недоступен в связи с проведением 
+            <strong>технических работ</strong> на серверном оборудовании. 
+            Мы обновляем системы и улучшаем производительность, 
+            чтобы сделать ваш опыт ещё лучше.
+        </div>
+
+        <div class="progress-container" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 70%;"></div>
+        </div>
+
+        <div class="footer-note">
+            <span>📧 <a href="mailto:snt_medradiolog@list.ru" class="contact-link">snt_medradiolog@list.ru</a></span>
+            <span>🔄 <span>обновление: 18.07.2026</span></span>
         </div>
     </div>
 
-    <div class="top-menu">
-        <a href="#" data-page="news" class="active">ГЛАВНАЯ</a>
-        <span class="separator">|</span>
-        <a href="#" data-page="calendar">КАЛЕНДАРЬ СОБЫТИЙ</a>
-        <span class="separator">|</span>
-        <a href="#" data-page="feedback">ОБРАТНАЯ СВЯЗЬ</a>
-        <span class="separator">|</span>
-        <a href="#" data-page="info">ИНФОРМАЦИЯ</a>
-        <span class="separator">|</span>
-        <a href="#" data-page="pay">ВЗНОСЫ</a>
-        <span class="separator">|</span>
-        <a href="#" data-page="norm">УСТАВ</a>
-        <span class="separator">|</span>
-        <a href="#" data-page="registration">РЕГИСТРАЦИЯ</a>
-    </div>
-
-    <div class="sub-menu">
-        <a href="#" data-page="docs">КОНТАКТЫ</a>
-        <a href="#" data-page="norm">УСТАВ</a>
-        <a href="#" data-page="ads">ОБЪЯВЛЕНИЕ</a>
-        <a href="#" data-page="meetings">ОБЩЕЕ СОБРАНИЕ</a>
-        <a href="#" data-page="court">СУД</a>
-        <a href="#" data-page="vote">ГОЛОСОВАНИЕ</a>
-        <a href="#" data-page="forum">ФОРУМ</a>
-        <a href="#" data-page="chat">ЧАТЫ</a>
-        <a href="#" data-page="rules">ПРАВИЛА</a>
-    </div>
-
-    <div id="pageContent" class="page-content active">
-        <div id="page-news" class="page-content-inner active">
-            <h2>📰 Новости СНТ «Медрадиолог»</h2>
-            <div class="date" id="newsDate">Обновлено: 18 июля 2026</div>
-            <div id="newsContainer"></div>
-        </div>
-
-        <div id="page-rules" class="page-content-inner">
-            <h2>📋 Правила СНТ «Медрадиолог»</h2>
-            <div class="date">Версия 2.4 от 01.06.2026</div>
-            <div id="rulesContainer"></div>
-        </div>
-
-        <div id="page-ads" class="page-content-inner">
-            <h2>📢 Объявления</h2>
-            <div class="date">Актуально на 18.07.2026</div>
-            <div id="adsContainer"></div>
-        </div>
-
-        <div id="page-meetings" class="page-content-inner">
-            <h2>📅 Собрания СНТ «Медрадиолог»</h2>
-            <div class="date">Планируемые и прошедшие</div>
-            <div id="meetingsContainer"></div>
-        </div>
-
-        <div id="page-court" class="page-content-inner">
-            <h2>⚖️ Суд и разбирательства</h2>
-            <div class="date">Информация по судебным делам</div>
-            <div id="courtContainer"></div>
-        </div>
-
-        <div id="page-vote" class="page-content-inner">
-            <h2>🗳️ Голосование</h2>
-            <div class="date">Активные опросы</div>
-            <div id="voteContainer"></div>
-        </div>
-
-        <div id="page-docs" class="page-content-inner">
-            <h2>📄 Контакты и реквизиты</h2>
-            <div id="docsContainer"></div>
-        </div>
-
-        <div id="page-pay" class="page-content-inner">
-            <h2>💰 Взносы и оплата</h2>
-            <div class="date">Тарифы на 2026 год</div>
-            <div id="payContainer"></div>
-        </div>
-
-        <div id="page-norm" class="page-content-inner">
-            <h2>📜 Устав и нормативные документы</h2>
-            <div id="normContainer"></div>
-        </div>
-
-        <div id="page-info" class="page-content-inner">
-            <h2>ℹ️ Полезная информация</h2>
-            <div id="infoContainer"></div>
-        </div>
-
-        <div id="page-forum" class="page-content-inner">
-            <h2>💬 Форум СНТ «Медрадиолог»</h2>
-            <p>Добро пожаловать на форум! Здесь вы можете задать вопросы, поделиться новостями и обсудить важные темы.</p>
-            <div id="forumContainer"></div>
-        </div>
-
-        <div id="page-chat" class="page-content-inner">
-            <h2>📱 Чаты СНТ «Медрадиолог»</h2>
-            <p>Присоединяйтесь к нашим чатам для оперативного общения:</p>
-            <div id="chatContainer"></div>
-        </div>
-
-        <div id="page-registration" class="page-content-inner">
-            <h2>📝 Регистрация</h2>
-            <div class="info-box">
-                <p><strong>Уважаемые посетители!</strong></p>
-                <p>Часть функционала сайта (в том числе личный кабинет и форум) доступна только подтверждённым пользователям.</p>
-                <p>Для получения учетных данных (имя пользователя и пароль) необходимо направить администратору сайта по почте заявку. Обязательны к указанию полные фамилия, имя, отчество, телефонный номер для экстренной связи, а также являетесь ли вы членом СНТ или собственником. Для формирования квитанции необходим также номер участка.</p>
-                <p>После сверки с реестром членов СНТ в случае подтверждения предоставленных данных вам в ответ будет направлено письмо со ссылкой для первого входа и изменения пароля. В дальнейшем вы сможете самостоятельно изменить пароль на странице настроек профиля в любой момент.</p>
-                <p>При неподтверждении предоставленных данных будет направлено соответствующее уведомление.</p>
-                <p style="margin-top: 12px;"><strong>Адрес для отправки заявок:</strong></p>
-                <span class="email-highlight">snt_medradiolog@list.ru</span>
-            </div>
-            <h3 style="margin-top: 30px; color: #2a4337; font-weight: 500;">📋 Форма заявки</h3>
-            <form id="registrationForm" class="feedback-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Фамилия <span class="required">*</span></label>
-                        <input type="text" id="regSurname" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Имя <span class="required">*</span></label>
-                        <input type="text" id="regName" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Отчество</label>
-                    <input type="text" id="regPatronymic">
-                </div>
-                <div class="form-group">
-                    <label>Телефон <span class="required">*</span></label>
-                    <input type="tel" id="regPhone" placeholder="+7 (___) ___-__-__" required>
-                </div>
-                <div class="form-group">
-                    <label>Номер(а) участка <span class="required">*</span></label>
-                    <input type="text" id="regPlots" placeholder="Например: 15, 42, 7А" required>
-                    <small style="color: #6f8a76;">Если несколько участков, перечислите через запятую</small>
-                </div>
-                <div class="form-group">
-                    <label>Являюсь</label>
-                    <select id="regStatus">
-                        <option value="member">Членом СНТ</option>
-                        <option value="owner">Собственником</option>
-                        <option value="both">И членом, и собственником</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Дополнительная информация</label>
-                    <textarea id="regInfo" placeholder="Любая дополнительная информация" rows="3"></textarea>
-                </div>
-                <div class="consent">
-                    <input type="checkbox" id="regConsent" required>
-                    <label for="regConsent">Я даю согласие на обработку своих персональных данных</label>
-                </div>
-                <button type="submit" class="submit-btn">📨 Отправить заявку</button>
-            </form>
-            <div id="regStatusMsg" style="margin-top: 16px; text-align: center; font-weight: 500;"></div>
-        </div>
-
-        <div id="page-feedback" class="page-content-inner">
-            <h2>📝 Обратная связь</h2>
-            <p>Заполните форму ниже, и мы свяжемся с вами в ближайшее время.</p>
-            <form id="feedbackForm" class="feedback-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Фамилия <span class="required">*</span></label>
-                        <input type="text" id="fbSurname" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Имя <span class="required">*</span></label>
-                        <input type="text" id="fbName" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Отчество</label>
-                    <input type="text" id="fbPatronymic">
-                </div>
-                <div class="form-group">
-                    <label>№ Участка <span class="required">*</span></label>
-                    <input type="text" id="fbPlot" required>
-                </div>
-                <div class="form-group">
-                    <label>Телефон <span class="required">*</span></label>
-                    <input type="tel" id="fbPhone" placeholder="+7 (___) ___-__-__" required>
-                    <small style="color: #6f8a76;">не забывайте про код города</small>
-                </div>
-                <div class="form-group">
-                    <label>Email <span class="required">*</span></label>
-                    <input type="email" id="fbEmail" required>
-                </div>
-                <div class="form-group">
-                    <label>Сообщение <span class="required">*</span></label>
-                    <textarea id="fbMessage" required></textarea>
-                </div>
-                <div class="consent">
-                    <input type="checkbox" id="fbConsent" required>
-                    <label for="fbConsent">Нажимая на кнопку, вы даёте согласие на обработку своих персональных данных.</label>
-                </div>
-                <button type="submit" class="submit-btn">📨 Отправить</button>
-            </form>
-            <div id="feedbackStatus" style="margin-top: 16px; text-align: center; font-weight: 500;"></div>
-        </div>
-
-        <div id="page-calendar" class="page-content-inner">
-            <h2>📅 Календарь событий</h2>
-            <div id="calendarContainer"></div>
-            <div style="margin-top: 20px;">
-                <h3 style="color: #2a4337; font-weight: 500; margin-bottom: 12px;">📌 Предстоящие события</h3>
-                <div id="upcomingEvents">
-                    <p style="color: #6f8a76;">События не найдены</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="divider-light"></div>
-
-    <div id="adminPanel" class="admin-panel">
-        <h4>
-            🧑‍🌾 Управление сайтом <span>редактор</span>
-            <button id="saveToStorageBtn" class="save-btn" style="font-size:0.8rem; padding:4px 16px;">💾 Сохранить</button>
-            <span class="save-hint">данные в localStorage</span>
-        </h4>
-
-        <div class="admin-section">
-            <h5>📩 Заявки на регистрацию</h5>
-            <div id="applicationsList" class="topic-list"></div>
-            <div class="admin-actions">
-                <button id="clearAppsBtn" class="danger-btn">🗑️ Очистить все заявки</button>
-            </div>
-        </div>
-
-        <div class="admin-section">
-            <h5>✅ Подтверждённые пользователи</h5>
-            <div class="admin-grid">
-                <div class="admin-item">
-                    <label>Фамилия</label>
-                    <input type="text" id="adminUserSurname" placeholder="Фамилия">
-                </div>
-                <div class="admin-item">
-                    <label>Имя</label>
-                    <input type="text" id="adminUserName" placeholder="Имя">
-                </div>
-                <div class="admin-item">
-                    <label>Отчество</label>
-                    <input type="text" id="adminUserPatronymic" placeholder="Отчество">
-                </div>
-                <div class="admin-item">
-                    <label>Телефон</label>
-                    <input type="text" id="adminUserPhone" placeholder="+7 (___) ___-__-__">
-                </div>
-                <div class="admin-item">
-                    <label>Номер(а) участка</label>
-                    <input type="text" id="adminUserPlots" placeholder="15, 42, 7А">
-                </div>
-                <div class="admin-item">
-                    <label>Статус</label>
-                    <select id="adminUserStatus">
-                        <option value="member">Член СНТ</option>
-                        <option value="owner">Собственник</option>
-                        <option value="both">Член и собственник</option>
-                    </select>
-                </div>
-            </div>
-            <div class="admin-actions">
-                <button id="addUserBtn">➕ Добавить пользователя</button>
-                <button id="clearUsersBtn" class="danger-btn">🗑️ Очистить всех</button>
-            </div>
-            <div id="usersList" class="topic-list"></div>
-        </div>
-
-        <div class="admin-section">
-            <h5>📝 Управление контентом страниц</h5>
-            <div class="page-selector" id="pageSelector">
-                <button data-page="news" class="active">Новости</button>
-                <button data-page="rules">Правила</button>
-                <button data-page="ads">Объявления</button>
-                <button data-page="meetings">Собрания</button>
-                <button data-page="court">Суд</button>
-                <button data-page="vote">Голосование</button>
-                <button data-page="docs">Контакты</button>
-                <button data-page="pay">Взносы</button>
-                <button data-page="norm">Устав</button>
-                <button data-page="info">Информация</button>
-                <button data-page="forum">Форум</button>
-                <button data-page="chat">Чаты</button>
-            </div>
-            <div class="admin-grid">
-                <div class="admin-item">
-                    <label>Заголовок поста</label>
-                    <input type="text" id="postTitle" placeholder="Введите заголовок">
-                </div>
-                <div class="admin-item">
-                    <label>Текст поста</label>
-                    <textarea id="postText" placeholder="Введите текст" rows="3"></textarea>
-                </div>
-            </div>
-            <div class="admin-actions">
-                <button id="addPostBtn">➕ Добавить пост</button>
-                <button id="clearPagePostsBtn" class="danger-btn">🗑️ Очистить все посты</button>
-            </div>
-            <div id="pagePostsList" class="topic-list"></div>
-        </div>
-
-        <div class="admin-section">
-            <h5>📅 Управление событиями</h5>
-            <div class="admin-grid">
-                <div class="admin-item">
-                    <label>Название события</label>
-                    <input type="text" id="eventTitle" placeholder="Введите название">
-                </div>
-                <div class="admin-item">
-                    <label>Дата события</label>
-                    <input type="date" id="eventDate">
-                </div>
-                <div class="admin-item">
-                    <label>Описание</label>
-                    <textarea id="eventDesc" placeholder="Описание события" rows="2"></textarea>
-                </div>
-            </div>
-            <div class="admin-actions">
-                <button id="addEventBtn">➕ Добавить событие</button>
-                <button id="clearEventsBtn" class="danger-btn">🗑️ Очистить все события</button>
-            </div>
-            <div id="eventsList" class="topic-list"></div>
-        </div>
-
-        <div class="admin-section">
-            <h5>📨 Сообщения обратной связи</h5>
-            <div id="feedbackMessages"></div>
-            <div class="admin-actions">
-                <button id="clearFeedbackBtn" class="danger-btn">🗑️ Очистить все сообщения</button>
-            </div>
-        </div>
-
-        <div class="admin-actions">
-            <button id="closeAdminBtn" class="close-panel">✕ Закрыть панель</button>
-        </div>
-        <div class="small-note">✨ данные автоматически сохраняются в localStorage</div>
-    </div>
-
-    <div class="footer">
-        <div class="copy">
-            <span class="year">© 2026</span>
-            <button id="designToggleBtn" class="design-btn">KolaDesign</button>
-        </div>
-        <div class="up" id="upBtn">
-            Наверх ↑
-        </div>
-    </div>
-    <div style="text-align: right; font-size: 0.7rem; color: #8da886; padding: 6px 0 14px 0; border-top: 1px solid #e2ead9; margin-top: 4px; letter-spacing: 0.5px;">
-        🌿 сделано с душой
-    </div>
-</div>
-
-<div id="loginOverlay" class="login-overlay">
-    <div class="login-modal">
-        <h3>🔐 Вход в управление</h3>
-        <label for="loginUser">Логин</label>
-        <input type="text" id="loginUser" placeholder="admin" value="admin">
-        <label for="loginPass">Пароль</label>
-        <input type="password" id="loginPass" placeholder="••••••••" value="admin">
-        <div id="loginError" class="login-error">❌ Неверный логин или пароль</div>
-        <div class="login-actions">
-            <button class="cancel-btn" id="loginCancel">Отмена</button>
-            <button class="login-btn" id="loginSubmit">Войти</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    (function() {
-        // === КЛЮЧИ ДЛЯ ХРАНЕНИЯ ===
-        const STORAGE_KEY = 'snt_medradiolog_data';
-        const VERSION_KEY = 'snt_medradiolog_version';
-
-        // === ЗАГРУЗКА ДАННЫХ ===
-        function loadAllData() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    // Проверяем версию
-                    const version = localStorage.getItem(VERSION_KEY) || '1.0';
-                    if (data && typeof data === 'object') {
-                        return data;
-                    }
+    <script>
+        // маленькая имитация "прогресса" (чисто декоративная)
+        const bar = document.querySelector('.progress-bar');
+        if (bar) {
+            let width = 70;
+            setInterval(() => {
+                const delta = Math.sin(Date.now() / 4000) * 3;
+                const newWidth = Math.min(78, Math.max(62, 70 + delta));
+                bar.style.width = newWidth + '%';
+                const parent = bar.closest('[role="progressbar"]');
+                if (parent) {
+                    parent.setAttribute('aria-valuenow', Math.round(newWidth));
                 }
-            } catch(e) {
-                console.log('Ошибка загрузки данных:', e);
-            }
-            return getDefaultData();
+            }, 1800);
         }
-
-        // === ДЕФОЛТНЫЕ ДАННЫЕ ===
-        function getDefaultData() {
-            return {
-                pageData: {
-                    news: [],
-                    rules: [],
-                    ads: [],
-                    meetings: [],
-                    court: [],
-                    vote: [],
-                    docs: [
-                        { id: 1, title: 'Реквизиты СНТ', text: 'ИНН: 5009123456, КПП: 500901001, ОГРН: 1165000054321' },
-                        { id: 2, title: 'Контактная информация', text: 'Адрес: Московская обл., г. Домодедово, ул. Садовая, д. 1. Тел: +7 (495) 123-45-67' }
-                    ],
-                    pay: [
-                        { id: 1, title: 'Членские взносы', text: '3000 ₽ / месяц с участка' },
-                        { id: 2, title: 'Целевые взносы', text: 'Ремонт дорог: 5000 ₽, Благоустройство: 2000 ₽' },
-                        { id: 3, title: 'Электроэнергия', text: '5.6 ₽ / кВт·ч' }
-                    ],
-                    norm: [
-                        { id: 1, title: 'Устав СНТ', text: 'Устав СНТ «Медрадиолог» (2025 г.)' },
-                        { id: 2, title: 'Правила внутреннего распорядка', text: 'Правила внутреннего распорядка (2026 г.)' }
-                    ],
-                    info: [
-                        { id: 1, title: '🚑 Экстренные службы', text: 'Пожарная: 112, 101. Скорая: 112, 103. Полиция: 112, 102.' },
-                        { id: 2, title: '📞 Контакты правления', text: 'Председатель: +7 (916) 123-45-67. Бухгалтер: +7 (916) 765-43-21.' }
-                    ],
-                    forum: [],
-                    chat: [
-                        { id: 1, title: '📱 Telegram-чат', text: 'Ссылка: t.me/medradiolog_snt' },
-                        { id: 2, title: '📱 WhatsApp-группа', text: 'Ссылка: chat.whatsapp.com/medradiolog' }
-                    ]
-                },
-                events: [],
-                feedbackMessages: [],
-                users: [],
-                applications: [],
-                nextIds: {}
-            };
-        }
-
-        // === СОХРАНЕНИЕ ДАННЫХ ===
-        function saveAllData() {
-            const data = {
-                pageData: pageData,
-                events: events,
-                feedbackMessages: feedbackMessages,
-                users: users,
-                applications: applications,
-                nextIds: nextIds
-            };
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            localStorage.setItem(VERSION_KEY, '1.1');
-            // Принудительно обновляем все страницы
-            renderAllPages();
-            renderCalendar();
-            renderFeedbackMessages();
-            renderUsers();
-            renderApplications();
-            if (panel.classList.contains('active')) {
-                renderAdminPosts(currentAdminPage);
-                renderEventsList();
-            }
-        }
-
-        // === ЗАГРУЗКА ===
-        const allData = loadAllData();
-        let pageData = allData.pageData || {};
-        let events = allData.events || [];
-        let feedbackMessages = allData.feedbackMessages || [];
-        let users = allData.users || [];
-        let applications = allData.applications || [];
-        let nextIds = allData.nextIds || {};
-
-        // Инициализируем nextIds для всех страниц
-        Object.keys(pageData).forEach(key => {
-            if (!nextIds[key]) {
-                const maxId = pageData[key].reduce((max, item) => Math.max(max, item.id || 0), 0);
-                nextIds[key] = maxId + 1;
-            }
-        });
-
-        // === DOM ЭЛЕМЕНТЫ ===
-        const panel = document.getElementById('adminPanel');
-        const toggleBtn = document.getElementById('designToggleBtn');
-        const closeBtn = document.getElementById('closeAdminBtn');
-        const saveBtn = document.getElementById('saveToStorageBtn');
-        const loginHeaderBtn = document.getElementById('loginHeaderBtn');
-        const loginOverlay = document.getElementById('loginOverlay');
-        const loginUser = document.getElementById('loginUser');
-        const loginPass = document.getElementById('loginPass');
-        const loginSubmit = document.getElementById('loginSubmit');
-        const loginCancel = document.getElementById('loginCancel');
-        const loginError = document.getElementById('loginError');
-        const pagePostsList = document.getElementById('pagePostsList');
-        const feedbackMessagesContainer = document.getElementById('feedbackMessages');
-        const feedbackForm = document.getElementById('feedbackForm');
-        const usersList = document.getElementById('usersList');
-        const applicationsList = document.getElementById('applicationsList');
-        const registrationForm = document.getElementById('registrationForm');
-
-        let isAuthenticated = false;
-        let currentPage = 'news';
-        let currentAdminPage = 'news';
-
-        // === ФУНКЦИИ РЕНДЕРИНГА ===
-        function renderPage(pageId) {
-            const container = document.getElementById(`${pageId}Container`);
-            if (!container) return;
-            const data = pageData[pageId] || [];
-            if (data.length === 0) {
-                container.innerHTML = '<p style="color: #6f8a76;">Нет записей. Добавьте первую запись в админ-панели.</p>';
-                return;
-            }
-            let html = '';
-            data.forEach(item => {
-                html += `
-                    <div class="card">
-                        <h4>${item.title}</h4>
-                        <p>${item.text}</p>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-            const dateEl = document.getElementById('newsDate');
-            if (dateEl) {
-                dateEl.textContent = 'Обновлено: ' + new Date().toLocaleDateString();
-            }
-        }
-
-        function renderAllPages() {
-            Object.keys(pageData).forEach(id => renderPage(id));
-        }
-
-        function renderAdminPosts(pageId) {
-            if (!pagePostsList) return;
-            const data = pageData[pageId] || [];
-            if (data.length === 0) {
-                pagePostsList.innerHTML = '<p style="color: #6f8a76; font-size:0.9rem;">Нет записей</p>';
-                return;
-            }
-            let html = '';
-            data.forEach(item => {
-                html += `
-                    <div class="topic-item">
-                        <span class="topic-name">${item.title}</span>
-                        <button class="topic-delete" data-page="${pageId}" data-id="${item.id}">✕</button>
-                    </div>
-                `;
-            });
-            pagePostsList.innerHTML = html;
-            pagePostsList.querySelectorAll('.topic-delete').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const page = this.getAttribute('data-page');
-                    const id = parseInt(this.getAttribute('data-id'));
-                    deletePost(page, id);
-                });
-            });
-        }
-
-        function renderUsers() {
-            if (!usersList) return;
-            if (users.length === 0) {
-                usersList.innerHTML = '<p style="color: #6f8a76; font-size:0.9rem;">Нет подтверждённых пользователей</p>';
-                return;
-            }
-            let html = '';
-            users.forEach(user => {
-                html += `
-                    <div class="user-item">
-                        <span class="user-info">${user.surname} ${user.name} ${user.patronymic || ''} | уч. ${user.plots} | ${user.phone}</span>
-                        <span class="user-status approved">✅ подтверждён</span>
-                        <button class="user-delete" data-user-id="${user.id}">✕</button>
-                    </div>
-                `;
-            });
-            usersList.innerHTML = html;
-            usersList.querySelectorAll('.user-delete').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = parseInt(this.getAttribute('data-user-id'));
-                    deleteUser(id);
-                });
-            });
-        }
-
-        function renderApplications() {
-            if (!applicationsList) return;
-            if (applications.length === 0) {
-                applicationsList.innerHTML = '<p style="color: #6f8a76; font-size:0.9rem;">Нет новых заявок</p>';
-                return;
-            }
-            let html = '';
-            applications.forEach((app, index) => {
-                const statusMap = { member: 'Член СНТ', owner: 'Собственник', both: 'Член и собственник' };
-                html += `
-                    <div class="topic-item">
-                        <span class="topic-name">
-                            <strong>${app.surname} ${app.name} ${app.patronymic || ''}</strong> 
-                            | тел: ${app.phone} 
-                            | уч. ${app.plots} 
-                            | ${statusMap[app.status] || app.status}
-                            ${app.info ? ' | ' + app.info : ''}
-                        </span>
-                        <span class="topic-status pending">⏳ ожидает</span>
-                        <button class="approve-btn" data-app-index="${index}">✅ Подтвердить</button>
-                        <button class="topic-delete" data-app-index="${index}">✕</button>
-                    </div>
-                `;
-            });
-            applicationsList.innerHTML = html;
-
-            applicationsList.querySelectorAll('.approve-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-app-index'));
-                    approveApplication(index);
-                });
-            });
-
-            applicationsList.querySelectorAll('.topic-delete').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-app-index'));
-                    if (confirm('Удалить эту заявку?')) {
-                        applications.splice(index, 1);
-                        saveAllData();
-                        renderApplications();
-                    }
-                });
-            });
-        }
-
-        function approveApplication(index) {
-            if (index < 0 || index >= applications.length) return;
-            const app = applications[index];
-            if (confirm(`Подтвердить регистрацию пользователя ${app.surname} ${app.name}?`)) {
-                const maxId = users.reduce((max, u) => Math.max(max, u.id || 0), 0);
-                users.push({
-                    id: maxId + 1,
-                    surname: app.surname,
-                    name: app.name,
-                    patronymic: app.patronymic || '',
-                    phone: app.phone,
-                    plots: app.plots,
-                    status: app.status || 'member'
-                });
-                applications.splice(index, 1);
-                saveAllData();
-                renderUsers();
-                renderApplications();
-                alert('✅ Пользователь подтверждён и добавлен в список!');
-            }
-        }
-
-        function renderCalendar() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = now.getMonth();
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-            const weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-
-            let startOffset = (firstDay === 0) ? 6 : firstDay - 1;
-
-            let html = `
-                <div class="calendar-container">
-                    <div class="calendar-header">
-                        <h3>${monthNames[month]} ${year}</h3>
-                    </div>
-                    <div class="calendar-grid">
-            `;
-
-            weekdays.forEach(day => {
-                html += `<div class="weekday">${day}</div>`;
-            });
-
-            for (let i = 0; i < startOffset; i++) {
-                html += `<div class="day empty"></div>`;
-            }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const hasEvent = events.some(e => e.date === dateStr);
-                html += `<div class="day ${hasEvent ? 'has-event' : ''}">${day}</div>`;
-            }
-
-            html += `</div></div>`;
-            document.getElementById('calendarContainer').innerHTML = html;
-            renderUpcomingEvents();
-        }
-
-        function renderUpcomingEvents() {
-            const today = new Date().toISOString().split('T')[0];
-            const upcoming = events.filter(e => e.date >= today).sort((a, b) => a.date.localeCompare(b.date));
-            const container = document.getElementById('upcomingEvents');
-            if (!container) return;
-            if (upcoming.length === 0) {
-                container.innerHTML = '<p style="color: #6f8a76;">События не найдены</p>';
-                return;
-            }
-            let html = '';
-            upcoming.forEach(event => {
-                const dateObj = new Date(event.date + 'T00:00:00');
-                const formattedDate = dateObj.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-                html += `
-                    <div class="card">
-                        <h4>📌 ${event.title}</h4>
-                        <p><strong>${formattedDate}</strong></p>
-                        <p>${event.description || ''}</p>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-
-        function renderEventsList() {
-            const eventsList = document.getElementById('eventsList');
-            if (!eventsList) return;
-            if (events.length === 0) {
-                eventsList.innerHTML = '<p style="color: #6f8a76; font-size:0.9rem;">Событий пока нет</p>';
-                return;
-            }
-            let html = '';
-            events.forEach(item => {
-                html += `
-                    <div class="topic-item">
-                        <span class="topic-name">${item.title} (${item.date})</span>
-                        <button class="topic-delete" data-event-id="${item.id}">✕</button>
-                    </div>
-                `;
-            });
-            eventsList.innerHTML = html;
-            eventsList.querySelectorAll('.topic-delete').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = parseInt(this.getAttribute('data-event-id'));
-                    deleteEvent(id);
-                });
-            });
-        }
-
-        function renderFeedbackMessages() {
-            if (!feedbackMessagesContainer) return;
-            if (feedbackMessages.length === 0) {
-                feedbackMessagesContainer.innerHTML = '<p style="color: #6f8a76; font-size:0.9rem;">Нет сообщений</p>';
-                return;
-            }
-            let html = '';
-            feedbackMessages.forEach(msg => {
-                html += `
-                    <div class="feedback-message">
-                        <div class="msg-header">
-                            <span><strong>${msg.surname} ${msg.name} ${msg.patronymic || ''}</strong> | уч. №${msg.plot} | ${msg.phone} | ${msg.email}</span>
-                            <button class="msg-delete" data-fb-id="${msg.id}">✕</button>
-                        </div>
-                        <div class="msg-text">${msg.message}</div>
-                    </div>
-                `;
-            });
-            feedbackMessagesContainer.innerHTML = html;
-            feedbackMessagesContainer.querySelectorAll('.msg-delete').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = parseInt(this.getAttribute('data-fb-id'));
-                    deleteFeedback(id);
-                });
-            });
-        }
-
-        // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
-        function switchPage(pageId) {
-            currentPage = pageId;
-            document.querySelectorAll('.page-content-inner').forEach(el => el.classList.remove('active'));
-            const target = document.getElementById(`page-${pageId}`);
-            if (target) {
-                target.classList.add('active');
-                target.parentElement.classList.add('active');
-            }
-            document.querySelectorAll('.top-menu a, .sub-menu a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-page') === pageId) link.classList.add('active');
-            });
-            renderPage(pageId);
-            if (pageId === 'calendar') renderCalendar();
-        }
-
-        // === CRUD ОПЕРАЦИИ ===
-        function deletePost(pageId, id) {
-            if (confirm('Удалить этот пост?')) {
-                pageData[pageId] = pageData[pageId].filter(item => item.id !== id);
-                saveAllData();
-                renderPage(pageId);
-                renderAdminPosts(currentAdminPage);
-            }
-        }
-
-        function clearPagePosts(pageId) {
-            if (confirm(`Удалить все посты на странице "${pageId}"?`)) {
-                pageData[pageId] = [];
-                saveAllData();
-                renderPage(pageId);
-                renderAdminPosts(currentAdminPage);
-            }
-        }
-
-        function addPost(pageId, title, text) {
-            if (!title.trim() || !text.trim()) { alert('Заполните заголовок и текст'); return; }
-            const id = nextIds[pageId] || 1;
-            pageData[pageId].push({ id: id, title: title.trim(), text: text.trim() });
-            nextIds[pageId] = id + 1;
-            saveAllData();
-            renderPage(pageId);
-            renderAdminPosts(currentAdminPage);
-            document.getElementById('postTitle').value = '';
-            document.getElementById('postText').value = '';
-        }
-
-        function addUser(surname, name, patronymic, phone, plots, status) {
-            if (!surname.trim() || !name.trim() || !phone.trim() || !plots.trim()) {
-                alert('Заполните все обязательные поля');
-                return;
-            }
-            const maxId = users.reduce((max, u) => Math.max(max, u.id || 0), 0);
-            users.push({
-                id: maxId + 1,
-                surname: surname.trim(),
-                name: name.trim(),
-                patronymic: patronymic.trim() || '',
-                phone: phone.trim(),
-                plots: plots.trim(),
-                status: status || 'member'
-            });
-            saveAllData();
-            renderUsers();
-            document.getElementById('adminUserSurname').value = '';
-            document.getElementById('adminUserName').value = '';
-            document.getElementById('adminUserPatronymic').value = '';
-            document.getElementById('adminUserPhone').value = '';
-            document.getElementById('adminUserPlots').value = '';
-        }
-
-        function deleteUser(id) {
-            if (confirm('Удалить этого пользователя?')) {
-                users = users.filter(item => item.id !== id);
-                saveAllData();
-                renderUsers();
-            }
-        }
-
-        function clearAllUsers() {
-            if (confirm('Удалить всех пользователей?')) {
-                users = [];
-                saveAllData();
-                renderUsers();
-            }
-        }
-
-        function addEvent(title, date, desc) {
-            if (!title.trim() || !date) { alert('Заполните название и дату'); return; }
-            const maxId = events.reduce((max, e) => Math.max(max, e.id || 0), 0);
-            events.push({ id: maxId + 1, title: title.trim(), date: date, description: desc.trim() || '' });
-            saveAllData();
-            renderCalendar();
-            renderEventsList();
-            document.getElementById('eventTitle').value = '';
-            document.getElementById('eventDate').value = '';
-            document.getElementById('eventDesc').value = '';
-        }
-
-        function deleteEvent(id) {
-            if (confirm('Удалить это событие?')) {
-                events = events.filter(item => item.id !== id);
-                saveAllData();
-                renderCalendar();
-                renderEventsList();
-            }
-        }
-
-        function clearAllEvents() {
-            if (confirm('Удалить все события?')) {
-                events = [];
-                saveAllData();
-                renderCalendar();
-                renderEventsList();
-            }
-        }
-
-        function addFeedback(data) {
-            const maxId = feedbackMessages.reduce((max, m) => Math.max(max, m.id || 0), 0);
-            feedbackMessages.push({
-                id: maxId + 1,
-                surname: data.surname,
-                name: data.name,
-                patronymic: data.patronymic || '',
-                plot: data.plot,
-                phone: data.phone,
-                email: data.email,
-                message: data.message
-            });
-            saveAllData();
-            renderFeedbackMessages();
-        }
-
-        function deleteFeedback(id) {
-            if (confirm('Удалить это сообщение?')) {
-                feedbackMessages = feedbackMessages.filter(item => item.id !== id);
-                saveAllData();
-                renderFeedbackMessages();
-            }
-        }
-
-        function clearAllFeedback() {
-            if (confirm('Удалить все сообщения?')) {
-                feedbackMessages = [];
-                saveAllData();
-                renderFeedbackMessages();
-            }
-        }
-
-        function addApplication(data) {
-            applications.push({
-                surname: data.surname,
-                name: data.name,
-                patronymic: data.patronymic || '',
-                phone: data.phone,
-                plots: data.plots,
-                status: data.status || 'member',
-                info: data.info || '',
-                date: new Date().toISOString()
-            });
-            saveAllData();
-            renderApplications();
-        }
-
-        function clearAllApplications() {
-            if (confirm('Удалить все заявки?')) {
-                applications = [];
-                saveAllData();
-                renderApplications();
-            }
-        }
-
-        // === АВТОРИЗАЦИЯ ===
-        function showLoginModal() {
-            loginOverlay.classList.add('active');
-            loginUser.value = '';
-            loginPass.value = '';
-            loginError.classList.remove('show');
-            loginUser.focus();
-        }
-
-        function showAdminPanel() {
-            panel.classList.add('active');
-            renderAdminPosts(currentAdminPage);
-            renderEventsList();
-            renderFeedbackMessages();
-            renderUsers();
-            renderApplications();
-            loginHeaderBtn.textContent = '🚪 Выйти';
-            loginHeaderBtn.classList.add('logged-in');
-        }
-
-        function hideAdminPanel() {
-            panel.classList.remove('active');
-            loginHeaderBtn.textContent = '🔐 Вход';
-            loginHeaderBtn.classList.remove('logged-in');
-            isAuthenticated = false;
-        }
-
-        function performLogin() {
-            const user = loginUser.value.trim();
-            const pass = loginPass.value.trim();
-            if (user === 'admin' && pass === 'admin') {
-                isAuthenticated = true;
-                loginOverlay.classList.remove('active');
-                loginError.classList.remove('show');
-                showAdminPanel();
-            } else {
-                loginError.classList.add('show');
-                loginPass.value = '';
-                loginPass.focus();
-            }
-        }
-
-        function logout() {
-            if (confirm('Выйти из панели управления?')) {
-                hideAdminPanel();
-            }
-        }
-
-        // === ИНИЦИАЛИЗАЦИЯ ===
-        function init() {
-            renderAllPages();
-            renderCalendar();
-            renderFeedbackMessages();
-            renderUsers();
-            renderApplications();
-            switchPage('news');
-
-            // Кнопка сохранения
-            saveBtn.addEventListener('click', function() {
-                saveAllData();
-                alert('✅ Все данные сохранены в localStorage!\n\nОбновите страницу у других пользователей, чтобы увидеть изменения.');
-            });
-
-            // Вход/выход
-            loginHeaderBtn.addEventListener('click', function() {
-                if (isAuthenticated) {
-                    logout();
-                } else {
-                    showLoginModal();
-                }
-            });
-
-            loginSubmit.addEventListener('click', performLogin);
-            loginCancel.addEventListener('click', function() {
-                loginOverlay.classList.remove('active');
-                loginError.classList.remove('show');
-            });
-
-            loginUser.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') loginPass.focus();
-            });
-            loginPass.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') performLogin();
-            });
-
-            loginOverlay.addEventListener('click', function(e) {
-                if (e.target === loginOverlay) {
-                    loginOverlay.classList.remove('active');
-                    loginError.classList.remove('show');
-                }
-            });
-
-            // Кнопка KolaDesign
-            toggleBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (isAuthenticated) {
-                    if (panel.classList.contains('active')) {
-                        hideAdminPanel();
-                    } else {
-                        showAdminPanel();
-                    }
-                } else {
-                    showLoginModal();
-                }
-            });
-
-            closeBtn.addEventListener('click', function() {
-                if (isAuthenticated) {
-                    hideAdminPanel();
-                }
-            });
-
-            // Переключатели страниц в админке
-            document.querySelectorAll('#pageSelector button').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('#pageSelector button').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentAdminPage = this.getAttribute('data-page');
-                    renderAdminPosts(currentAdminPage);
-                    document.getElementById('postTitle').value = '';
-                    document.getElementById('postText').value = '';
-                });
-            });
-
-            // Добавление поста
-            document.getElementById('addPostBtn').addEventListener('click', function() {
-                addPost(currentAdminPage, document.getElementById('postTitle').value, document.getElementById('postText').value);
-            });
-
-            document.getElementById('clearPagePostsBtn').addEventListener('click', function() {
-                clearPagePosts(currentAdminPage);
-            });
-
-            // Пользователи
-            document.getElementById('addUserBtn').addEventListener('click', function() {
-                addUser(
-                    document.getElementById('adminUserSurname').value,
-                    document.getElementById('adminUserName').value,
-                    document.getElementById('adminUserPatronymic').value,
-                    document.getElementById('adminUserPhone').value,
-                    document.getElementById('adminUserPlots').value,
-                    document.getElementById('adminUserStatus').value
-                );
-            });
-
-            document.getElementById('clearUsersBtn').addEventListener('click', clearAllUsers);
-            document.getElementById('clearAppsBtn').addEventListener('click', clearAllApplications);
-
-            // События
-            document.getElementById('addEventBtn').addEventListener('click', function() {
-                addEvent(
-                    document.getElementById('eventTitle').value,
-                    document.getElementById('eventDate').value,
-                    document.getElementById('eventDesc').value
-                );
-            });
-
-            document.getElementById('clearEventsBtn').addEventListener('click', clearAllEvents);
-            document.getElementById('clearFeedbackBtn').addEventListener('click', clearAllFeedback);
-
-            // Форма обратной связи
-            feedbackForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const surname = document.getElementById('fbSurname').value.trim();
-                const name = document.getElementById('fbName').value.trim();
-                const patronymic = document.getElementById('fbPatronymic').value.trim();
-                const plot = document.getElementById('fbPlot').value.trim();
-                const phone = document.getElementById('fbPhone').value.trim();
-                const email = document.getElementById('fbEmail').value.trim();
-                const message = document.getElementById('fbMessage').value.trim();
-                const consent = document.getElementById('fbConsent').checked;
-
-                if (!surname || !name || !plot || !phone || !email || !message) {
-                    document.getElementById('feedbackStatus').innerHTML = '<span style="color: #b14a4a;">❌ Заполните все обязательные поля</span>';
-                    return;
-                }
-                if (!consent) {
-                    document.getElementById('feedbackStatus').innerHTML = '<span style="color: #b14a4a;">❌ Необходимо дать согласие</span>';
-                    return;
-                }
-
-                addFeedback({ surname, name, patronymic, plot, phone, email, message });
-                document.getElementById('feedbackStatus').innerHTML = '<span style="color: #4f8a64;">✅ Сообщение отправлено!</span>';
-                feedbackForm.reset();
-                setTimeout(() => { document.getElementById('feedbackStatus').innerHTML = ''; }, 5000);
-            });
-
-            // Форма регистрации
-            registrationForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const surname = document.getElementById('regSurname').value.trim();
-                const name = document.getElementById('regName').value.trim();
-                const patronymic = document.getElementById('regPatronymic').value.trim();
-                const phone = document.getElementById('regPhone').value.trim();
-                const plots = document.getElementById('regPlots').value.trim();
-                const status = document.getElementById('regStatus').value;
-                const info = document.getElementById('regInfo').value.trim();
-                const consent = document.getElementById('regConsent').checked;
-
-                if (!surname || !name || !phone || !plots) {
-                    document.getElementById('regStatusMsg').innerHTML = '<span style="color: #b14a4a;">❌ Заполните все обязательные поля</span>';
-                    return;
-                }
-                if (!consent) {
-                    document.getElementById('regStatusMsg').innerHTML = '<span style="color: #b14a4a;">❌ Необходимо дать согласие</span>';
-                    return;
-                }
-
-                addApplication({ surname, name, patronymic, phone, plots, status, info });
-                document.getElementById('regStatusMsg').innerHTML = `
-                    <div style="background: #e8f4e0; border-radius: 16px; padding: 20px; text-align: left;">
-                        <p style="color: #1f402a; font-weight: 500;">✅ Заявка отправлена!</p>
-                        <p style="color: #2d4437; margin-top: 8px;">Ваша заявка на регистрацию получена. После проверки данных администратором вы получите уведомление.</p>
-                    </div>
-                `;
-                registrationForm.reset();
-                setTimeout(() => { document.getElementById('regStatusMsg').innerHTML = ''; }, 8000);
-            });
-
-            // Кнопка "Наверх"
-            document.getElementById('upBtn').addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // Меню
-            document.querySelectorAll('.top-menu a, .sub-menu a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const page = this.getAttribute('data-page');
-                    if (page) switchPage(page);
-                });
-            });
-
-            console.log('🌱 СНТ «Медрадиолог» загружен');
-            console.log('👤 Пользователей:', users.length);
-            console.log('📩 Заявок:', applications.length);
-            console.log('📝 Постов:', Object.keys(pageData).reduce((sum, key) => sum + pageData[key].length, 0));
-            console.log('📅 Событий:', events.length);
-            console.log('📨 Сообщений:', feedbackMessages.length);
-            console.log('🔐 Логин: admin, пароль: admin');
-            console.log('📌 ВАЖНО: Данные хранятся в localStorage браузера. Чтобы изменения видели все пользователи, нужно использовать сервер.');
-        }
-
-        init();
-    })();
-</script>
+    </script>
 </body>
 </html>
