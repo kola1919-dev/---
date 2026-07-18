@@ -90,7 +90,6 @@
             border-color: #5a8262;
         }
 
-        /* Верхнее меню */
         .top-menu {
             background: #e8efe2;
             border-radius: 60px;
@@ -132,7 +131,6 @@
             user-select: none;
         }
 
-        /* Второй ряд меню */
         .sub-menu {
             display: flex;
             flex-wrap: wrap;
@@ -657,16 +655,6 @@
             background: #5a8262;
         }
 
-        .admin-actions .approve-btn {
-            background: #6f9a78;
-            border-color: #5a8262;
-            color: white;
-        }
-
-        .admin-actions .approve-btn:hover {
-            background: #5a8262;
-        }
-
         .small-note {
             font-size: 0.8rem;
             color: #708d72;
@@ -690,12 +678,15 @@
             border-radius: 12px;
             margin-bottom: 6px;
             border: 1px solid #dce3d2;
+            flex-wrap: wrap;
+            gap: 4px;
         }
 
         .topic-item .topic-name {
             font-weight: 450;
             color: #1f402a;
             flex: 1;
+            min-width: 150px;
         }
 
         .topic-item .topic-delete {
@@ -720,7 +711,7 @@
             font-size: 0.8rem;
             padding: 2px 12px;
             border-radius: 30px;
-            margin-right: 8px;
+            margin-right: 4px;
         }
 
         .topic-item .topic-status.pending {
@@ -731,6 +722,21 @@
         .topic-item .topic-status.approved {
             background: #b0d4b0;
             color: #1a5a2a;
+        }
+
+        .topic-item .approve-btn {
+            background: #6f9a78;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 2px 12px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.15s;
+        }
+
+        .topic-item .approve-btn:hover {
+            background: #5a8262;
         }
 
         .feedback-message {
@@ -889,12 +895,15 @@
             border-radius: 12px;
             margin-bottom: 6px;
             border: 1px solid #dce3d2;
+            flex-wrap: wrap;
+            gap: 4px;
         }
 
         .user-item .user-info {
             font-weight: 450;
             color: #1f402a;
             flex: 1;
+            min-width: 150px;
         }
 
         .user-item .user-delete {
@@ -919,7 +928,7 @@
             font-size: 0.8rem;
             padding: 2px 12px;
             border-radius: 30px;
-            margin-right: 8px;
+            margin-right: 4px;
         }
 
         .user-item .user-status.pending {
@@ -1026,7 +1035,6 @@
 </head>
 <body>
 <div class="container">
-    <!-- ШАПКА -->
     <div class="header">
         <h1 id="siteTitle">
             СНТ «Медрадиолог»
@@ -1037,7 +1045,6 @@
         </div>
     </div>
 
-    <!-- ВЕРХНЕЕ МЕНЮ -->
     <div class="top-menu">
         <a href="#" data-page="news" class="active">ГЛАВНАЯ</a>
         <span class="separator">|</span>
@@ -1054,7 +1061,6 @@
         <a href="#" data-page="registration">РЕГИСТРАЦИЯ</a>
     </div>
 
-    <!-- ВТОРОЙ РЯД МЕНЮ -->
     <div class="sub-menu">
         <a href="#" data-page="docs">КОНТАКТЫ</a>
         <a href="#" data-page="norm">УСТАВ</a>
@@ -1067,9 +1073,7 @@
         <a href="#" data-page="rules">ПРАВИЛА</a>
     </div>
 
-    <!-- СТРАНИЦЫ (контент) -->
     <div id="pageContent" class="page-content active">
-        <!-- Новости -->
         <div id="page-news" class="page-content-inner active">
             <h2>📰 Новости СНТ «Медрадиолог»</h2>
             <div class="date" id="newsDate">Обновлено: 18 июля 2026</div>
@@ -1139,7 +1143,6 @@
             <div id="chatContainer"></div>
         </div>
 
-        <!-- Регистрация -->
         <div id="page-registration" class="page-content-inner">
             <h2>📝 Регистрация</h2>
             <div class="info-box">
@@ -1151,7 +1154,6 @@
                 <p style="margin-top: 12px;"><strong>Адрес для отправки заявок:</strong></p>
                 <span class="email-highlight">snt_medradiolog@list.ru</span>
             </div>
-
             <h3 style="margin-top: 30px; color: #2a4337; font-weight: 500;">📋 Форма заявки</h3>
             <form id="registrationForm" class="feedback-form">
                 <div class="form-row">
@@ -1198,7 +1200,6 @@
             <div id="regStatusMsg" style="margin-top: 16px; text-align: center; font-weight: 500;"></div>
         </div>
 
-        <!-- Обратная связь -->
         <div id="page-feedback" class="page-content-inner">
             <h2>📝 Обратная связь</h2>
             <p>Заполните форму ниже, и мы свяжемся с вами в ближайшее время.</p>
@@ -1243,7 +1244,6 @@
             <div id="feedbackStatus" style="margin-top: 16px; text-align: center; font-weight: 500;"></div>
         </div>
 
-        <!-- Календарь -->
         <div id="page-calendar" class="page-content-inner">
             <h2>📅 Календарь событий</h2>
             <div id="calendarContainer"></div>
@@ -1258,7 +1258,6 @@
 
     <div class="divider-light"></div>
 
-    <!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
     <div id="adminPanel" class="admin-panel">
         <h4>
             🧑‍🌾 Управление сайтом <span>редактор</span>
@@ -1266,7 +1265,6 @@
             <span class="save-hint">данные в localStorage</span>
         </h4>
 
-        <!-- Заявки на регистрацию -->
         <div class="admin-section">
             <h5>📩 Заявки на регистрацию</h5>
             <div id="applicationsList" class="topic-list"></div>
@@ -1275,7 +1273,6 @@
             </div>
         </div>
 
-        <!-- Подтверждённые пользователи -->
         <div class="admin-section">
             <h5>✅ Подтверждённые пользователи</h5>
             <div class="admin-grid">
@@ -1315,7 +1312,6 @@
             <div id="usersList" class="topic-list"></div>
         </div>
 
-        <!-- Управление контентом страниц -->
         <div class="admin-section">
             <h5>📝 Управление контентом страниц</h5>
             <div class="page-selector" id="pageSelector">
@@ -1349,7 +1345,6 @@
             <div id="pagePostsList" class="topic-list"></div>
         </div>
 
-        <!-- Управление событиями -->
         <div class="admin-section">
             <h5>📅 Управление событиями</h5>
             <div class="admin-grid">
@@ -1373,7 +1368,6 @@
             <div id="eventsList" class="topic-list"></div>
         </div>
 
-        <!-- Сообщения обратной связи -->
         <div class="admin-section">
             <h5>📨 Сообщения обратной связи</h5>
             <div id="feedbackMessages"></div>
@@ -1388,7 +1382,6 @@
         <div class="small-note">✨ данные автоматически сохраняются в localStorage</div>
     </div>
 
-    <!-- ФУТЕР -->
     <div class="footer">
         <div class="copy">
             <span class="year">© 2026</span>
@@ -1403,7 +1396,6 @@
     </div>
 </div>
 
-<!-- Модальное окно логина -->
 <div id="loginOverlay" class="login-overlay">
     <div class="login-modal">
         <h3>🔐 Вход в управление</h3>
@@ -1566,7 +1558,6 @@
         let currentPage = 'news';
         let currentAdminPage = 'news';
 
-        // === Рендеринг ===
         function renderPage(pageId) {
             const container = document.getElementById(`${pageId}Container`);
             if (!container) return;
@@ -1625,7 +1616,6 @@
             }
             let html = '';
             users.forEach(user => {
-                const statusMap = { member: 'Член СНТ', owner: 'Собственник', both: 'Член и собственник' };
                 html += `
                     <div class="user-item">
                         <span class="user-info">${user.surname} ${user.name} ${user.patronymic || ''} | уч. ${user.plots} | ${user.phone}</span>
@@ -1662,10 +1652,8 @@
                             ${app.info ? ' | ' + app.info : ''}
                         </span>
                         <span class="topic-status pending">⏳ ожидает</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="approve-btn" style="background:#6f9a78;color:white;border:none;border-radius:30px;padding:2px 12px;cursor:pointer;font-size:0.8rem;" data-app-index="${index}">✅ Подтвердить</button>
-                            <button class="topic-delete" data-app-index="${index}">✕</button>
-                        </div>
+                        <button class="approve-btn" data-app-index="${index}">✅ Подтвердить</button>
+                        <button class="topic-delete" data-app-index="${index}">✕</button>
                     </div>
                 `;
             });
@@ -1694,7 +1682,6 @@
             if (index < 0 || index >= applications.length) return;
             const app = applications[index];
             if (confirm(`Подтвердить регистрацию пользователя ${app.surname} ${app.name}?`)) {
-                // Добавляем в пользователи
                 const maxId = users.reduce((max, u) => Math.max(max, u.id || 0), 0);
                 users.push({
                     id: maxId + 1,
@@ -1705,7 +1692,6 @@
                     plots: app.plots,
                     status: app.status || 'member'
                 });
-                // Удаляем из заявок
                 applications.splice(index, 1);
                 saveData();
                 renderUsers();
@@ -1843,19 +1829,6 @@
             if (pageId === 'calendar') renderCalendar();
         }
 
-        // === CRUD ===
-        function addPost(pageId, title, text) {
-            if (!title.trim() || !text.trim()) { alert('Заполните заголовок и текст'); return; }
-            const id = nextIds[pageId] || 1;
-            pageData[pageId].push({ id: id, title: title.trim(), text: text.trim() });
-            nextIds[pageId] = id + 1;
-            saveData();
-            renderPage(pageId);
-            renderAdminPosts(currentAdminPage);
-            document.getElementById('postTitle').value = '';
-            document.getElementById('postText').value = '';
-        }
-
         function deletePost(pageId, id) {
             if (confirm('Удалить этот пост?')) {
                 pageData[pageId] = pageData[pageId].filter(item => item.id !== id);
@@ -1872,6 +1845,18 @@
                 renderPage(pageId);
                 renderAdminPosts(currentAdminPage);
             }
+        }
+
+        function addPost(pageId, title, text) {
+            if (!title.trim() || !text.trim()) { alert('Заполните заголовок и текст'); return; }
+            const id = nextIds[pageId] || 1;
+            pageData[pageId].push({ id: id, title: title.trim(), text: text.trim() });
+            nextIds[pageId] = id + 1;
+            saveData();
+            renderPage(pageId);
+            renderAdminPosts(currentAdminPage);
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postText').value = '';
         }
 
         function addUser(surname, name, patronymic, phone, plots, status) {
@@ -1999,29 +1984,30 @@
             }
         }
 
-        function showPanel() {
-            if (isAuthenticated) {
-                panel.classList.add('active');
-                renderAdminPosts(currentAdminPage);
-                renderEventsList();
-                renderFeedbackMessages();
-                renderUsers();
-                renderApplications();
-                loginHeaderBtn.textContent = '🚪 Выйти';
-                loginHeaderBtn.classList.add('logged-in');
-            } else {
-                loginOverlay.classList.add('active');
-                loginUser.value = 'admin';
-                loginPass.value = 'admin';
-                loginError.classList.remove('show');
-                loginUser.focus();
-            }
+        function showLoginModal() {
+            loginOverlay.classList.add('active');
+            loginUser.value = '';
+            loginPass.value = '';
+            loginError.classList.remove('show');
+            loginUser.focus();
         }
 
-        function hidePanel() {
+        function showAdminPanel() {
+            panel.classList.add('active');
+            renderAdminPosts(currentAdminPage);
+            renderEventsList();
+            renderFeedbackMessages();
+            renderUsers();
+            renderApplications();
+            loginHeaderBtn.textContent = '🚪 Выйти';
+            loginHeaderBtn.classList.add('logged-in');
+        }
+
+        function hideAdminPanel() {
             panel.classList.remove('active');
             loginHeaderBtn.textContent = '🔐 Вход';
             loginHeaderBtn.classList.remove('logged-in');
+            isAuthenticated = false;
         }
 
         function performLogin() {
@@ -2031,14 +2017,7 @@
                 isAuthenticated = true;
                 loginOverlay.classList.remove('active');
                 loginError.classList.remove('show');
-                panel.classList.add('active');
-                renderAdminPosts(currentAdminPage);
-                renderEventsList();
-                renderFeedbackMessages();
-                renderUsers();
-                renderApplications();
-                loginHeaderBtn.textContent = '🚪 Выйти';
-                loginHeaderBtn.classList.add('logged-in');
+                showAdminPanel();
             } else {
                 loginError.classList.add('show');
                 loginPass.value = '';
@@ -2047,8 +2026,9 @@
         }
 
         function logout() {
-            isAuthenticated = false;
-            hidePanel();
+            if (confirm('Выйти из панели управления?')) {
+                hideAdminPanel();
+            }
         }
 
         function init() {
@@ -2061,15 +2041,53 @@
 
             saveBtn.addEventListener('click', function() {
                 saveData();
-                alert('✅ Все данные сохранены в localStorage!\n\nВы можете скопировать этот код на GitHub Pages.');
+                alert('✅ Все данные сохранены в localStorage!');
             });
 
-            // Кнопка входа в шапке
             loginHeaderBtn.addEventListener('click', function() {
                 if (isAuthenticated) {
                     logout();
                 } else {
-                    showPanel();
+                    showLoginModal();
+                }
+            });
+
+            loginSubmit.addEventListener('click', performLogin);
+            loginCancel.addEventListener('click', function() {
+                loginOverlay.classList.remove('active');
+                loginError.classList.remove('show');
+            });
+
+            loginUser.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') loginPass.focus();
+            });
+            loginPass.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') performLogin();
+            });
+
+            loginOverlay.addEventListener('click', function(e) {
+                if (e.target === loginOverlay) {
+                    loginOverlay.classList.remove('active');
+                    loginError.classList.remove('show');
+                }
+            });
+
+            toggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (isAuthenticated) {
+                    if (panel.classList.contains('active')) {
+                        hideAdminPanel();
+                    } else {
+                        showAdminPanel();
+                    }
+                } else {
+                    showLoginModal();
+                }
+            });
+
+            closeBtn.addEventListener('click', function() {
+                if (isAuthenticated) {
+                    hideAdminPanel();
                 }
             });
 
@@ -2104,7 +2122,6 @@
             });
 
             document.getElementById('clearUsersBtn').addEventListener('click', clearAllUsers);
-
             document.getElementById('clearAppsBtn').addEventListener('click', clearAllApplications);
 
             document.getElementById('addEventBtn').addEventListener('click', function() {
@@ -2116,7 +2133,6 @@
             });
 
             document.getElementById('clearEventsBtn').addEventListener('click', clearAllEvents);
-
             document.getElementById('clearFeedbackBtn').addEventListener('click', clearAllFeedback);
 
             feedbackForm.addEventListener('submit', function(e) {
@@ -2176,39 +2192,6 @@
                 setTimeout(() => { document.getElementById('regStatusMsg').innerHTML = ''; }, 8000);
             });
 
-            toggleBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (!isAuthenticated) {
-                    showPanel();
-                } else if (panel.classList.contains('active')) {
-                    hidePanel();
-                } else {
-                    showPanel();
-                }
-            });
-
-            closeBtn.addEventListener('click', hidePanel);
-
-            loginSubmit.addEventListener('click', performLogin);
-            loginCancel.addEventListener('click', function() {
-                loginOverlay.classList.remove('active');
-                loginError.classList.remove('show');
-            });
-
-            loginUser.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') loginPass.focus();
-            });
-            loginPass.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') performLogin();
-            });
-
-            loginOverlay.addEventListener('click', function(e) {
-                if (e.target === loginOverlay) {
-                    loginOverlay.classList.remove('active');
-                    loginError.classList.remove('show');
-                }
-            });
-
             document.getElementById('upBtn').addEventListener('click', function() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
@@ -2221,16 +2204,16 @@
                 });
             });
 
-            console.log('🌱 Данные загружены из localStorage');
+            console.log('🌱 СНТ «Медрадиолог» загружен');
             console.log('👤 Пользователей:', users.length);
             console.log('📩 Заявок:', applications.length);
             console.log('📝 Постов:', Object.keys(pageData).reduce((sum, key) => sum + pageData[key].length, 0));
             console.log('📅 Событий:', events.length);
             console.log('📨 Сообщений:', feedbackMessages.length);
+            console.log('🔐 Логин: admin, пароль: admin');
         }
 
         init();
-        console.log('🌱 СНТ «Медрадиолог» загружен. Кнопка входа в шапке. Логин: admin, пароль: admin');
     })();
 </script>
 </body>
